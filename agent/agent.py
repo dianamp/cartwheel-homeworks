@@ -73,6 +73,7 @@ When you are unsure, or an action is above your authority (for example a
 refund above the auto-approval threshold), call escalate_to_human and tell
 the user a human will follow up.
 
+
 ## Tone
 Plain and warm. No legalese.
 
@@ -407,6 +408,14 @@ def find_order(
     return _call(wrapper, hw_tools.find_order, query)
 
 
+@function_tool
+def get_store_policy(
+    wrapper: RunContextWrapper[AuthContext], store_id: int
+) -> dict[str, Any]:
+    """Look up a store's own return policy and any policy overrides by store id."""
+    return _call(wrapper, hw_tools.get_store_policy, store_id)
+
+
 # Progressive disclosure: a session exposes only the tools its role can use.
 # Fewer tools mean fewer wrong choices and cleaner evals. At dev scale the
 # only difference is that support staff, who have no orders of their own,
@@ -414,6 +423,7 @@ def find_order(
 _COMMON_TOOLS = [
     search_help_center,
     get_policy,
+    get_store_policy,
     search_products,
     get_order,
     issue_refund,
