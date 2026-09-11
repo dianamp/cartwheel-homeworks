@@ -3,10 +3,10 @@
 Style: interactive tutorial (handout walkthrough prompt). Started 2026-09-11.
 
 ## Current status
-Preparation done (files read, concepts covered). Next: Part A.
+Part A done (offline span check passed). Next: Part B.
 
 ## Deliverables checklist
-- [ ] Part A: `record_tool_result` and `_set_permission_denied_attributes` in `observability/instrument.py`
+- [x] Part A: `record_tool_result` and `_set_permission_denied_attributes` in `observability/instrument.py`
 - [ ] Part B: `create_session` in `server/app.py`; `uv run pytest --runxfail -vv tests/test_hw_holes.py -k "create_session_binds"` passes
 - [ ] Part C: `post_message` in `server/app.py` with the `cartwheel.session_message` root span and its attributes
 - [ ] Part D: `tests/test_observability.py` with two auth tests; `-k hw2` holes test, own tests, and full suite pass
@@ -28,4 +28,4 @@ Preparation done (files read, concepts covered). Next: Part A.
 - earlier: (pending)
 
 ## Next step
-Part A: implement the two helpers in `observability/instrument.py`.
+Part B: implement `create_session` in `server/app.py`, then `uv sync` and the focused test.
