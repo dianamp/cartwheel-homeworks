@@ -3,12 +3,12 @@
 Style: interactive tutorial (handout walkthrough prompt). Started 2026-09-11.
 
 ## Current status
-Part A done (offline span check passed). Next: Part B.
+Parts A, B, C done (B focused test passed per student). Next: Part D.
 
 ## Deliverables checklist
 - [x] Part A: `record_tool_result` and `_set_permission_denied_attributes` in `observability/instrument.py`
-- [ ] Part B: `create_session` in `server/app.py`; `uv run pytest --runxfail -vv tests/test_hw_holes.py -k "create_session_binds"` passes
-- [ ] Part C: `post_message` in `server/app.py` with the `cartwheel.session_message` root span and its attributes
+- [x] Part B: `create_session` in `server/app.py`; `uv run pytest --runxfail -vv tests/test_hw_holes.py -k "create_session_binds"` passes
+- [x] Part C: `post_message` in `server/app.py` with the `cartwheel.session_message` root span and its attributes
 - [ ] Part D: `tests/test_observability.py` with two auth tests; `-k hw2` holes test, own tests, and full suite pass
 - [ ] Part E: Langfuse up in Docker, server up, at least five traced requests from `hw1-session.jsonl`, root and tool spans inspected
 - [ ] Part F: same request under two prompt versions, two different `cartwheel.prompt_version` hashes recorded
@@ -28,4 +28,4 @@ Part A done (offline span check passed). Next: Part B.
 - earlier: (pending)
 
 ## Next step
-Part B: implement `create_session` in `server/app.py`, then `uv sync` and the focused test.
+Part D: write `tests/test_observability.py`, run `-k hw2`, own tests, full suite.

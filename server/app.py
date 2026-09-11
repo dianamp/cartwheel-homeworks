@@ -179,7 +179,34 @@ async def post_message(
     messages with role and parts fields.
     """
     ### YOUR CODE HERE (HW2)
-    raise NotImplementedError("HW2: implement the traced message endpoint")
+    ctx = _authorize(session_id, authorization)
+    _, session = _SESSIONS[session_id]
+    version = prompt_version()  # hashes SYSTEM_PROMPT_TEMPLATE only, not the rendered prompt
+    agent = build_agent(ctx, model=body.model)
+    trace_content = os.environ.get("TRACELOOP_TRACE_CONTENT", "false").lower() == "true"
+
+    with _tracer.start_as_current_span("cartwheel.session_message") as span:
+        span.set_attribute("cartwheel.user_role", ctx.role)
+        span.set_attribute("cartwheel.user_id", str(ctx.user_id))
+        span.set_attribute("cartwheel.prompt_version", version)
+        if body.scenario_id:
+            span.set_attribute("cartwheel.scenario_id", body.scenario_id)
+        if trace_content:
+            span.set_attribute(
+                "gen_ai.input.messages",
+                json.dumps([{"role": "user", "parts": [{"type": "text", "content": body.message}]}]),
+            )
+        result = await Runner.run(
+            agent, body.message, context=ctx, session=session, max_turns=MAX_TURNS
+        )
+        reply = str(result.final_output)
+        if trace_content:
+            span.set_attribute(
+                "gen_ai.output.messages",
+                json.dumps([{"role": "assistant", "parts": [{"type": "text", "content": reply}]}]),
+            )
+
+    return {"session_id": session_id, "reply": reply, "prompt_version": version}
 
 
 @app.get("/health")
