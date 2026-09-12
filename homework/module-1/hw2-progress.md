@@ -3,14 +3,14 @@
 Style: interactive tutorial (handout walkthrough prompt). Started 2026-09-11.
 
 ## Current status
-Parts A to D done, full suite green offline. Next: Part E (Docker Langfuse + server + five traced requests).
+Parts A to D done and committed. Upstream merged 2026-09-12 (quay.io minio image, store_id as string, lighter tutorial prompt). Part E in progress: Langfuse up, server up, 2 shopper-1 traces recorded so far. Next: remaining requests (merchant 9002 needs the restarted server).
 
 ## Deliverables checklist
 - [x] Part A: `record_tool_result` and `_set_permission_denied_attributes` in `observability/instrument.py`
 - [x] Part B: `create_session` in `server/app.py`; `uv run pytest --runxfail -vv tests/test_hw_holes.py -k "create_session_binds"` passes
 - [x] Part C: `post_message` in `server/app.py` with the `cartwheel.session_message` root span and its attributes
 - [x] Part D: `tests/test_observability.py` 2 passed; `-k hw2` 1 passed under `--runxfail`; full suite 135 passed, 12 skipped, 21 xfailed, 9 xpassed (offline)
-- [ ] Part E: Langfuse up in Docker, server up, at least five traced requests from `hw1-session.jsonl`, root and tool spans inspected
+- [~] Part E: Langfuse up (Docker fixed: credential helper symlink + upstream quay.io image), server up, 2 of 5+ traces recorded (shopper 1, order 4127: trace ids 697193b345b3192ac848ce6f00d69996, 6a75b38aaaeb88004b7edaa94e2af565); root span input/output confirmed via API
 - [ ] Part F: same request under two prompt versions, two different `cartwheel.prompt_version` hashes recorded
 - [ ] `hw2-traces.json` with exactly two trace records
 - [ ] Commit `observability/instrument.py`, `server/app.py`, `tests/test_observability.py`, `hw2-traces.json`
@@ -28,6 +28,12 @@ Parts A to D done, full suite green offline. Next: Part E (Docker Langfuse + ser
 
 ## Test isolation fix during Part D (2026-09-12)
 - `litellm/__init__.py` calls `load_dotenv()` on import, leaking `.env`'s `LANGFUSE_*` into the pytest process after the first LiteLLM-routed CLI test; `test_m2_run_judge_persists_store_predictions_for_prevalence` then tried a live Langfuse. Added an autouse fixture `_offline_langfuse` in `tests/conftest.py` that removes the three variables per test. `tests/conftest.py` also needs committing.
+
+## Part E findings
+- Langfuse consumes `gen_ai.input.messages`/`gen_ai.output.messages` into the span's Input/Output fields; they do not appear under metadata attributes. Trace-level input/output populated (checked via `lf.api.trace.get`).
+- Trace tree: trace row + root span (same name, not a duplicate) > Agent Workflow > cartwheel-support.agent > openai.response, list_my_orders, openai.response. Responses API spans carry `gen_ai.response.model`, no `gen_ai.request.model`.
+- `cartwheel.store_id` now recorded as a string (upstream change); server restart needed before merchant requests.
+- Session id is not on any span (not required); optional `session.id` root attribute would enable Langfuse Sessions grouping.
 
 ## Prompt versions (Part F)
 - current: (pending)
