@@ -3,13 +3,13 @@
 Style: interactive tutorial (handout walkthrough prompt). Started 2026-09-11.
 
 ## Current status
-Parts A, B, C done (B focused test passed per student). Next: Part D.
+Parts A to D done, full suite green offline. Next: Part E (Docker Langfuse + server + five traced requests).
 
 ## Deliverables checklist
 - [x] Part A: `record_tool_result` and `_set_permission_denied_attributes` in `observability/instrument.py`
 - [x] Part B: `create_session` in `server/app.py`; `uv run pytest --runxfail -vv tests/test_hw_holes.py -k "create_session_binds"` passes
 - [x] Part C: `post_message` in `server/app.py` with the `cartwheel.session_message` root span and its attributes
-- [~] Part D: `tests/test_observability.py` written, 2 passed; `-k hw2` xpassed. Full suite: 1 remaining failure (`test_m2_run_judge_persists_store_predictions_for_prevalence`, Langfuse connection refused), being bisected
+- [x] Part D: `tests/test_observability.py` 2 passed; `-k hw2` 1 passed under `--runxfail`; full suite 135 passed, 12 skipped, 21 xfailed, 9 xpassed (offline)
 - [ ] Part E: Langfuse up in Docker, server up, at least five traced requests from `hw1-session.jsonl`, root and tool spans inspected
 - [ ] Part F: same request under two prompt versions, two different `cartwheel.prompt_version` hashes recorded
 - [ ] `hw2-traces.json` with exactly two trace records
@@ -26,9 +26,12 @@ Parts A, B, C done (B focused test passed per student). Next: Part D.
 ## HW1 regression fixed during Part D (2026-09-12)
 - Upstream merge added `db.list_order_search_candidates` and `test_hw1_find_order_roles_and_old_matches`; the HW1 `find_order` still searched only the 20 newest orders and returned extra keys. Rewrote the scope/output in `agent/tools.py` and raised `FIND_ORDER_MIN_SCORE` to 80 (max-over-token-pairs scoring let one weak pair match once the whole history was searched). `-k hw1` 8 passed; tool/auth/eligibility 24 passed; one live CLI spot check OK. `agent/tools.py` now needs committing with the HW2 files.
 
+## Test isolation fix during Part D (2026-09-12)
+- `litellm/__init__.py` calls `load_dotenv()` on import, leaking `.env`'s `LANGFUSE_*` into the pytest process after the first LiteLLM-routed CLI test; `test_m2_run_judge_persists_store_predictions_for_prevalence` then tried a live Langfuse. Added an autouse fixture `_offline_langfuse` in `tests/conftest.py` that removes the three variables per test. `tests/conftest.py` also needs committing.
+
 ## Prompt versions (Part F)
 - current: (pending)
 - earlier: (pending)
 
 ## Next step
-Part D: bisect which earlier test leaks `LANGFUSE_*` into the process so the m2 judge test goes live; then full suite green.
+Part E: `docker compose -f observability/docker-compose.yml up -d`, then `uv run uvicorn server.app:app --port 8010`, sign in to Langfuse, run five requests from `hw1-session.jsonl`.

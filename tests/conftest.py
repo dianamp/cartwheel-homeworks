@@ -18,6 +18,20 @@ import pytest
 from seed.generate import generate_world
 
 
+@pytest.fixture(autouse=True)
+def _offline_langfuse(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Keep every test offline even after litellm's import-time load_dotenv().
+
+    Importing litellm (any LiteLLM-routed model) calls load_dotenv(), which
+    copies the repo's .env, including LANGFUSE_*, into os.environ for the rest
+    of the session. Later tests that gate on langfuse_io.is_configured() would
+    then try to reach a live Langfuse. Tests that need these variables set
+    them explicitly with monkeypatch, which runs after this fixture.
+    """
+    for key in ("LANGFUSE_PUBLIC_KEY", "LANGFUSE_SECRET_KEY", "LANGFUSE_HOST"):
+        monkeypatch.delenv(key, raising=False)
+
+
 @pytest.fixture(scope="session")
 def world(tmp_path_factory: pytest.TempPathFactory) -> dict[str, Path]:
     root = tmp_path_factory.mktemp("world")
