@@ -30,9 +30,12 @@ from agent.killswitch import kill_switch
 MAX_SEARCH_LIMIT = 25
 DEFAULT_ORDER_LIMIT = 20
 FIND_ORDER_MAX_RESULTS = 5
-# Deliberately loose: a shopper describes a product from memory, so we would
-# rather return a weak match with its score than miss the order entirely.
-FIND_ORDER_MIN_SCORE = 60.0
+# A query word must be a title word (substring hit, scored 100) or a near
+# typo of one (SequenceMatcher ratio above 80). The score is a max over token
+# pairs, so anything lower let one vaguely similar word match across the
+# whole order history; measured on the dev catalog, no real title scores above
+# 67 for an unrelated query while typos like "earmufs" still score 93.
+FIND_ORDER_MIN_SCORE = 80.0
 
 
 # Words that describe the purchase rather than the product. They must not
@@ -436,26 +439,20 @@ def find_order(ctx: AuthContext, query: str) -> dict[str, Any]:
 
     with db.connection() as conn:
         if ctx.role == "shopper":
-            orders = db.list_orders_for_user(conn, ctx.user_id)
+            orders = db.list_order_search_candidates(conn, user_id=ctx.user_id)
         elif ctx.role == "merchant":
-            orders = db.list_orders_for_store(conn, ctx.store_id)
-        else:  # support: any order
-            rows = conn.execute(
-                "SELECT * FROM orders ORDER BY ordered_at DESC, id DESC LIMIT ?",
-                (DEFAULT_ORDER_LIMIT,),
-            ).fetchall()
-            orders = [db._order_from_row(row) for row in rows]
+            orders = db.list_order_search_candidates(conn, store_id=ctx.store_id)
+        elif ctx.role == "support":
+            orders = db.list_order_search_candidates(conn, all_orders=True)
+        else:
+            return permission_denied(f"unsupported role: {ctx.role}")
         titles = {product.id: product.title for product in db.list_products(conn)}
 
-    scored = []
-    for order in orders:
-        title = titles.get(order.product_id, "")
-        score = _title_match_score(query, title)
-        if score >= FIND_ORDER_MIN_SCORE:
-            record = order.to_public_dict()
-            record["product_title"] = title
-            record["match_score"] = round(score, 1)
-            scored.append(record)
-
-    scored.sort(key=lambda o: (-o["match_score"], o["order_id"]))
-    return {"ok": True, "orders": scored[:FIND_ORDER_MAX_RESULTS]}
+    # Match across the whole authorized scope, keep its newest-first order,
+    # then truncate. Truncating first would hide older matches.
+    matches = [
+        order.to_public_dict()
+        for order in orders
+        if _title_match_score(query, titles.get(order.product_id, "")) >= FIND_ORDER_MIN_SCORE
+    ]
+    return {"ok": True, "orders": matches[:FIND_ORDER_MAX_RESULTS]}
