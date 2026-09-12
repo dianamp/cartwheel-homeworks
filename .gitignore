@@ -17,5 +17,8 @@ __pycache__/
 *.pyc
 .venv/
 .pytest_cache/
+
 *.db-shm
 .sessions.db-wal
+
+scenarios/demo_pilot_gt.json
