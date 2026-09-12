@@ -26,23 +26,10 @@ Request used: record 1, shopper 1, "What is the status of order 4127?"
 +the user a human will follow up.
 ```
 
-## Trace record candidates (hw2-traces.json)
+## Trace record candidates 
 
-Pick two you can explain from root span to final response.
+See hw2-traces.json
 
-1.
-2.
+Video is at https://www.loom.com/share/2e1986b24dcf414dbf22e6ab256941b3
 
-## Video plan (<= 5 min)
 
-- Run one authentication test: `uv run pytest tests/test_observability.py -k role`
-- Read trace 1 root span to final response
-- Read trace 2 root span to final response
-- How the endpoint established identity: POST /sessions looks up the user in the DB, builds AuthContext, signs the token; the token payload decodes to session_id, user_id, role, store_id
-- Tool calls and results in both traces
-- The two prompt version hashes from Part F
-- Regenerate the span count for one trace (API snippet)
-
-## Things I learned / questions
-
--

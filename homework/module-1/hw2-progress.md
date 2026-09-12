@@ -3,17 +3,17 @@
 Style: interactive tutorial (handout walkthrough prompt). Started 2026-09-11.
 
 ## Current status
-Parts A to D done and committed. Upstream merged 2026-09-12 (quay.io minio image, store_id as string, lighter tutorial prompt). Part E in progress: Langfuse up, server up, 2 shopper-1 traces recorded so far. Next: remaining requests (merchant 9002 needs the restarted server).
+Parts A to F done; hw2-traces.json complete. Remaining: commit hw2-traces.json, student's video.
 
 ## Deliverables checklist
 - [x] Part A: `record_tool_result` and `_set_permission_denied_attributes` in `observability/instrument.py`
 - [x] Part B: `create_session` in `server/app.py`; `uv run pytest --runxfail -vv tests/test_hw_holes.py -k "create_session_binds"` passes
 - [x] Part C: `post_message` in `server/app.py` with the `cartwheel.session_message` root span and its attributes
 - [x] Part D: `tests/test_observability.py` 2 passed; `-k hw2` 1 passed under `--runxfail`; full suite 135 passed, 12 skipped, 21 xfailed, 9 xpassed (offline)
-- [~] Part E: Langfuse up (Docker fixed: credential helper symlink + upstream quay.io image), server up, 2 of 5+ traces recorded (shopper 1, order 4127: trace ids 697193b345b3192ac848ce6f00d69996, 6a75b38aaaeb88004b7edaa94e2af565); root span input/output confirmed via API
-- [ ] Part F: same request under two prompt versions, two different `cartwheel.prompt_version` hashes recorded
-- [ ] `hw2-traces.json` with exactly two trace records
-- [ ] Commit `observability/instrument.py`, `server/app.py`, `tests/test_observability.py`, `hw2-traces.json`
+- [x] Part E: Langfuse up (Docker fixed: credential helper symlink + upstream quay.io image), server up, 8 traces recorded (shopper 1, merchant 9002); root and tool span attributes confirmed via API
+- [x] Part F: merchant 9002, "What is going on with order 4127?": current 1c43d7b67056 (trace 110f3d2109ac116768657c8cb4bcfb63) vs earlier HW1 wording 0811eb545d28 (trace 5fafca5968eb7970cb9486a5b17db0a0); prompt restored
+- [x] `homework/module-1/hw2-traces.json`: shopper 1 / order 3980 (8974f3ca0d5aba217a5e50394061f84d) and merchant 9002 / order 7713 (0b2055b4ab4f178d3aaa0fa4b286be65)
+- [~] Commit: instrument.py, app.py, test_observability.py, agent/tools.py, tests/conftest.py committed and pushed; hw2-traces.json still to commit
 - [ ] Video, <= 5 minutes, continuous (PENDING, student records it)
 
 ## Evidence so far
@@ -36,8 +36,8 @@ Parts A to D done and committed. Upstream merged 2026-09-12 (quay.io minio image
 - Session id is not on any span (not required); optional `session.id` root attribute would enable Langfuse Sessions grouping.
 
 ## Prompt versions (Part F)
-- current: (pending)
-- earlier: (pending)
+- current: 1c43d7b67056
+- earlier: 0811eb545d28 (HW1 pre-ESC-2 Escalation wording)
 
 ## Next step
-Part E: `docker compose -f observability/docker-compose.yml up -d`, then `uv run uvicorn server.app:app --port 8010`, sign in to Langfuse, run five requests from `hw1-session.jsonl`.
+Commit `homework/module-1/hw2-traces.json`, then the student records the video (plan in `hw2-notes.md`). Handout checks last run 2026-09-12: hw2 hole 1 passed, test_observability 2 passed, full suite 136 passed / 13 skipped / 21 xfailed / 9 xpassed, all offline. Live model calls this session: the Part E/F requests and one CLI find_order spot check.
