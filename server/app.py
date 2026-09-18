@@ -186,6 +186,7 @@ async def post_message(
     trace_content = os.environ.get("TRACELOOP_TRACE_CONTENT", "false").lower() == "true"
 
     with _tracer.start_as_current_span("cartwheel.session_message") as span:
+        span.set_attribute("cartwheel.session_id", session_id)
         span.set_attribute("cartwheel.user_role", ctx.role)
         span.set_attribute("cartwheel.user_id", str(ctx.user_id))
         span.set_attribute("cartwheel.prompt_version", version)
