@@ -1,1 +1,476 @@
-{"modes": []}
+{
+  "modes": [
+    {
+      "name": "irrelevant_policy_nuance",
+      "status": "candidate",
+      "definition": "The reply mentions a store override, restocking fee, or 'same window as Cartwheel' for a store whose get_store_policy result has has_override=false and restocking_fee_opt_in=false.",
+      "boundary": "Nearest: verbose_reply. This mode fires only on the specific override/restocking mention when the tool says none applies; general excess detail is verbose_reply. When an override or restocking fee really exists (0232, 0116) mentioning it is correct and this mode is absent.",
+      "spec_source": "RESP-5 (explain the relevant decision); candidate SPEC revision: do not describe inapplicable store policies",
+      "evaluator": "code_check",
+      "origin_annotation_ids": [
+        "mu7m0nfqp38sh",
+        "mu7mnc0cts20t",
+        "mu8skh5ac7xz0",
+        "mu8zxccgo9tz1",
+        "mu902zt255hcw",
+        "mu7na0rmqfrio"
+      ],
+      "positive_scenario_ids": [
+        "support-0001",
+        "support-0053",
+        "support-0064",
+        "support-0173",
+        "support-0217",
+        "support-0235"
+      ],
+      "positive_trace_ids": [
+        "04881b1188a69405e63c0cd38c97f2e1",
+        "1d64910a303986a1ecc4e7f95fb341aa",
+        "281b031bad676fb84b647bfd8a96169d",
+        "4c81b37b334a1935ccd51ddd43f7c017",
+        "5679b45d6e47d3900d2653280d6f878d",
+        "9bf584cc287fefdf7e0695d722782d01"
+      ],
+      "close_negative_scenario_ids": [
+        "support-0232",
+        "support-0116"
+      ],
+      "close_negative_trace_ids": [
+        "6342d3a0b67f74b505956dcfc58c4f75",
+        "0882d44696b71af0c20abb7decb3de68"
+      ],
+      "created_at": "2026-09-19T20:00:00Z",
+      "notes": null,
+      "history": [
+        {
+          "at": "2026-09-19T20:00:00Z",
+          "change": "created from axial pass 2 over batch1_uniform + batch2_intent (45 conversations)"
+        }
+      ]
+    },
+    {
+      "name": "restates_itself",
+      "status": "candidate",
+      "definition": "The reply states the same fact or instruction more than once within one turn (e.g. the delivery date, the return window, or a refusal repeated in different words).",
+      "boundary": "Nearest: verbose_reply. restates_itself requires literal repetition of a fact already given in the same reply; a long reply with no repeated fact is verbose_reply only.",
+      "spec_source": "RESP-5",
+      "evaluator": "llm_judge",
+      "origin_annotation_ids": [
+        "mu7n6eeknbb61",
+        "mu8zjipyb0c4e",
+        "mu8zjxrsslmwh",
+        "mu7n76ab0t4j9"
+      ],
+      "positive_scenario_ids": [
+        "support-0083",
+        "support-0116",
+        "support-0125",
+        "support-0232"
+      ],
+      "positive_trace_ids": [
+        "0882d44696b71af0c20abb7decb3de68",
+        "6342d3a0b67f74b505956dcfc58c4f75",
+        "92b0e2ed929edd7671202a6974559541",
+        "98d84c1c4e7a4cabe568cc81636cf4f1"
+      ],
+      "close_negative_scenario_ids": [],
+      "close_negative_trace_ids": [],
+      "created_at": "2026-09-19T20:00:00Z",
+      "notes": null,
+      "history": [
+        {
+          "at": "2026-09-19T20:00:00Z",
+          "change": "created from axial pass 2 over batch1_uniform + batch2_intent (45 conversations)"
+        }
+      ]
+    },
+    {
+      "name": "verbose_reply",
+      "status": "candidate",
+      "definition": "The reply includes policy mechanics, caveats, or background the user did not ask about and that are not needed to answer the question (beyond the answer, one citation, and one sentence of context).",
+      "boundary": "Nearest: restates_itself (repetition) and unsolicited_next_steps (offers of further action). verbose_reply covers unrequested explanation, not repetition and not offers. Definition still loose; sharpen in Batch 3.",
+      "spec_source": "RESP-5",
+      "evaluator": "llm_judge",
+      "origin_annotation_ids": [
+        "mu8s0kvrnx2ne",
+        "mu8si2dvh45y3",
+        "mu8zh3h8gwtv3",
+        "mu8zhov4mmewo",
+        "mu7ms8xe7dbzo",
+        "mu7mwdosatv01",
+        "mu7n7x8cebrwu",
+        "mu7na0rmqfrio"
+      ],
+      "positive_scenario_ids": [
+        "support-0047",
+        "support-0059",
+        "support-0092",
+        "support-0111",
+        "support-0137",
+        "support-0215",
+        "support-0232",
+        "support-0235"
+      ],
+      "positive_trace_ids": [
+        "04314ac3d3fc06b14cae105c8aa17d2a",
+        "04881b1188a69405e63c0cd38c97f2e1",
+        "1b8fec97e5b3f21c7180f8ee900a3695",
+        "20a17db1c717dc4499b614fb9aa629c0",
+        "6342d3a0b67f74b505956dcfc58c4f75",
+        "90e99ad5eb496f2e1ca2d8d952c25dc0",
+        "d02b5b8c9813b199e6512d5dea2ce8f4",
+        "fc8d189e31fd5f5951a11f951fd17142"
+      ],
+      "close_negative_scenario_ids": [],
+      "close_negative_trace_ids": [],
+      "created_at": "2026-09-19T20:00:00Z",
+      "notes": null,
+      "history": [
+        {
+          "at": "2026-09-19T20:00:00Z",
+          "change": "created from axial pass 2 over batch1_uniform + batch2_intent (45 conversations)"
+        }
+      ]
+    },
+    {
+      "name": "unsolicited_next_steps",
+      "status": "candidate",
+      "definition": "After answering, the reply offers an additional action, path, or follow-up (open a ticket, check another order, 'tell me if...') that the user did not ask for.",
+      "boundary": "Nearest: unnecessary_escalation. This mode is an offer in text; unnecessary_escalation is a ticket actually created. An escalation that the scenario requires (inconsistent record, past-window exception) is neither.",
+      "spec_source": "RESP-5; candidate SPEC revision: answer the question asked and stop",
+      "evaluator": "llm_judge",
+      "origin_annotation_ids": [
+        "mu7nvlkpesr85",
+        "mu8sku7a1ubxb",
+        "mu8zf56o72pi8",
+        "mu7n5l2l8s1k0",
+        "mu7msvhaavyhb"
+      ],
+      "positive_scenario_ids": [
+        "support-0006",
+        "support-0064",
+        "support-0069",
+        "support-0083",
+        "support-0137"
+      ],
+      "positive_trace_ids": [
+        "51171155d947caeb0b3797a848e3a529",
+        "5409b3cfa7c03957cccebf4361316979",
+        "5679b45d6e47d3900d2653280d6f878d",
+        "bb03f099869d2a3072396a1661caca89",
+        "d02b5b8c9813b199e6512d5dea2ce8f4"
+      ],
+      "close_negative_scenario_ids": [],
+      "close_negative_trace_ids": [],
+      "created_at": "2026-09-19T20:00:00Z",
+      "notes": null,
+      "history": [
+        {
+          "at": "2026-09-19T20:00:00Z",
+          "change": "created from axial pass 2 over batch1_uniform + batch2_intent (45 conversations)"
+        }
+      ]
+    },
+    {
+      "name": "unnecessary_escalation",
+      "status": "candidate",
+      "definition": "escalate_to_human is called although the request was already resolved by a successful tool result or is resolvable from the order record and help center without a human.",
+      "boundary": "Nearest: unsolicited_next_steps (offer vs. action). Close negatives: 0017 (order_store_mismatch, escalation expected by ESC-3) and 0042 (past-window goodwill refund, ESC-4).",
+      "spec_source": "ESC-3, ESC-4 (escalation is for what the agent cannot resolve)",
+      "evaluator": "code_check",
+      "origin_annotation_ids": [
+        "mu901fpcsxzxi"
+      ],
+      "positive_scenario_ids": [
+        "support-0200"
+      ],
+      "positive_trace_ids": [
+        "be629428cc3b148066befa3fcda0967f"
+      ],
+      "close_negative_scenario_ids": [
+        "support-0017",
+        "support-0042"
+      ],
+      "close_negative_trace_ids": [
+        "bd7424e5441eb7bc2ef9333eb82f83e0",
+        "8d9b7ca383decc606861ae9405a7b3c3"
+      ],
+      "created_at": "2026-09-19T20:00:00Z",
+      "notes": "one positive so far; hold unless Batch 3 finds more",
+      "history": [
+        {
+          "at": "2026-09-19T20:00:00Z",
+          "change": "created from axial pass 2 over batch1_uniform + batch2_intent (45 conversations)"
+        }
+      ]
+    },
+    {
+      "name": "assumes_instead_of_asking",
+      "status": "candidate",
+      "definition": "The request or the lookup result is ambiguous (several plausible orders, unclear complaint) and the reply proceeds on one interpretation instead of asking the user which one.",
+      "boundary": "Nearest: write_without_confirmation. This mode is about ambiguity of the request; it applies to read-only replies too (0248 order status, 0178 dispute). A write on a single unambiguous match without a confirmation is write_without_confirmation only.",
+      "spec_source": "RESP-3",
+      "evaluator": "llm_judge",
+      "origin_annotation_ids": [
+        "mu7mm2z7kjx3g",
+        "mu900drew8zht",
+        "mu7my7zimfkzv"
+      ],
+      "positive_scenario_ids": [
+        "support-0053",
+        "support-0178",
+        "support-0248"
+      ],
+      "positive_trace_ids": [
+        "4c81b37b334a1935ccd51ddd43f7c017",
+        "71dd82e225587efb0b96091501b7f9f0",
+        "b6cf93a3d5198d44b87aea2b6cc34be2"
+      ],
+      "close_negative_scenario_ids": [
+        "support-0011"
+      ],
+      "close_negative_trace_ids": [
+        "d63587734a8ed48b3fcec20764296e3c"
+      ],
+      "created_at": "2026-09-19T20:00:00Z",
+      "notes": null,
+      "history": [
+        {
+          "at": "2026-09-19T20:00:00Z",
+          "change": "created from axial pass 2 over batch1_uniform + batch2_intent (45 conversations)"
+        }
+      ]
+    },
+    {
+      "name": "write_without_confirmation",
+      "status": "candidate",
+      "definition": "issue_refund or cancel_order is called in the same turn in which the order was identified from a description (the user gave no order id), without an explicit user confirmation of that order.",
+      "boundary": "Nearest: assumes_instead_of_asking. This mode fires even when find_order returned exactly one match (0066, 0134). When the user supplied the order id (0155, 0243) the write needs no confirmation and the mode is absent.",
+      "spec_source": "RESP-6 (new): confirm the specific order before any write when the user did not supply the order id",
+      "evaluator": "code_check",
+      "origin_annotation_ids": [
+        "mu7mmgcxyoyy9",
+        "mu8slrzj34cou",
+        "mu8zkwthu47tq"
+      ],
+      "positive_scenario_ids": [
+        "support-0053",
+        "support-0066",
+        "support-0134"
+      ],
+      "positive_trace_ids": [
+        "4c81b37b334a1935ccd51ddd43f7c017",
+        "d8169bd01d0b78672c986bd74a59fb46",
+        "fa015c4d50cc0ef5aedd2358b3704a6b"
+      ],
+      "close_negative_scenario_ids": [
+        "support-0155",
+        "support-0243"
+      ],
+      "close_negative_trace_ids": [
+        "389ac9eb16d6ad5bd5fb5c28710231fd",
+        "7117832e7d57b89b4bb95c7c60ff52d9"
+      ],
+      "created_at": "2026-09-19T20:00:00Z",
+      "notes": null,
+      "history": [
+        {
+          "at": "2026-09-19T20:00:00Z",
+          "change": "created from axial pass 2 over batch1_uniform + batch2_intent (45 conversations)"
+        }
+      ]
+    },
+    {
+      "name": "raw_policy_id_in_prose",
+      "status": "candidate",
+      "definition": "The reply prints a policy identifier such as cw-returns or store-cascade-audio-policy in its prose instead of citing the policy by title with a link.",
+      "boundary": "Nearest: verbose_reply. This mode is only about the form of the citation. A reply that cites by title and link but is long is verbose_reply only. A reply with no citation at all is a RESP-1 miss, not this mode.",
+      "spec_source": "RESP-1 (revised): cite by title and link, not by raw identifier",
+      "evaluator": "code_check",
+      "origin_annotation_ids": [
+        "mu7m18md4qomu",
+        "mu7n5apj1ly2x",
+        "mu8rw5ry9dhs4",
+        "mu8zhvu8nvzx5",
+        "mu8zxccgo9tz1"
+      ],
+      "positive_scenario_ids": [
+        "support-0001",
+        "support-0020",
+        "support-0083",
+        "support-0111",
+        "support-0173"
+      ],
+      "positive_trace_ids": [
+        "281b031bad676fb84b647bfd8a96169d",
+        "95236a75300dcabe92b5b881cce01a41",
+        "9bf584cc287fefdf7e0695d722782d01",
+        "bb03f099869d2a3072396a1661caca89",
+        "fc8d189e31fd5f5951a11f951fd17142"
+      ],
+      "close_negative_scenario_ids": [],
+      "close_negative_trace_ids": [],
+      "created_at": "2026-09-19T20:00:00Z",
+      "notes": null,
+      "history": [
+        {
+          "at": "2026-09-19T20:00:00Z",
+          "change": "created from axial pass 2 over batch1_uniform + batch2_intent (45 conversations)"
+        }
+      ]
+    },
+    {
+      "name": "redundant_policy_lookup",
+      "status": "candidate",
+      "definition": "The agent calls search_help_center to locate a fixed platform policy whose identifier is known (cw-returns, cw-refunds), or fetches the same policy more than once in one conversation.",
+      "boundary": "Nearest: none in the reply layer; this is a tool-use mode. A search for a store policy whose id is unknown, or a single get_policy of a known id, is absent. find_order returning too little (0053) is tool design, parked.",
+      "spec_source": "TOOL-1/TOOL-2 contracts; candidate SPEC guidance on tool choice",
+      "evaluator": "code_check",
+      "origin_annotation_ids": [
+        "mu8rsbcljmlr6",
+        "mu8sj89lyr5lz",
+        "mu7n9chyyctv7"
+      ],
+      "positive_scenario_ids": [
+        "support-0017",
+        "support-0064",
+        "support-0235"
+      ],
+      "positive_trace_ids": [
+        "04881b1188a69405e63c0cd38c97f2e1",
+        "5679b45d6e47d3900d2653280d6f878d",
+        "bd7424e5441eb7bc2ef9333eb82f83e0"
+      ],
+      "close_negative_scenario_ids": [],
+      "close_negative_trace_ids": [],
+      "created_at": "2026-09-19T20:00:00Z",
+      "notes": null,
+      "history": [
+        {
+          "at": "2026-09-19T20:00:00Z",
+          "change": "created from axial pass 2 over batch1_uniform + batch2_intent (45 conversations)"
+        }
+      ]
+    },
+    {
+      "name": "product_search_in_chat",
+      "status": "candidate",
+      "definition": "The agent performs general product browsing for a shopper (options, recommendations, 'what do you have') in chat instead of directing them to the Cartwheel app.",
+      "boundary": "Nearest: none. A lookup of one specific listing for a merchant or support user (0079, 0170) remains supported and is absent.",
+      "spec_source": "SCOPE-1 (revised): general shopping and browsing go to the app",
+      "evaluator": "code_check",
+      "origin_annotation_ids": [
+        "mu8rx0lmpmwl7",
+        "mu8s17z1vvh37"
+      ],
+      "positive_scenario_ids": [
+        "support-0036",
+        "support-0050"
+      ],
+      "positive_trace_ids": [
+        "3ea0b3e13ac5d04540b99b32ab7899c1",
+        "6afdc8abc9a9bde0160f1bef8b0413d1"
+      ],
+      "close_negative_scenario_ids": [
+        "support-0170",
+        "support-0079"
+      ],
+      "close_negative_trace_ids": [
+        "b69c6ff17c92f3fc74ce7658c0727e25",
+        "214a9664bbe02ff28addbc7a31c7b36b"
+      ],
+      "created_at": "2026-09-19T20:00:00Z",
+      "notes": null,
+      "history": [
+        {
+          "at": "2026-09-19T20:00:00Z",
+          "change": "created from axial pass 2 over batch1_uniform + batch2_intent (45 conversations)"
+        }
+      ]
+    },
+    {
+      "name": "tone_mismatch",
+      "status": "candidate",
+      "definition": "The reply's tone is off for the situation: casual judgement ('you're right to flag'), first-person refusal ('I can't cancel it'), or no acknowledgement of a bad experience.",
+      "boundary": "Held. Observations point in different directions; needs a definition another reviewer could apply.",
+      "spec_source": "RESP-5",
+      "evaluator": "llm_judge",
+      "origin_annotation_ids": [
+        "mu7lznsmly7vh",
+        "mu7mqlcrftded",
+        "mu8rw5ry9dhs4",
+        "mu8zlzxu01v9j"
+      ],
+      "positive_scenario_ids": [
+        "support-0001",
+        "support-0020",
+        "support-0104",
+        "support-0155"
+      ],
+      "positive_trace_ids": [
+        "389ac9eb16d6ad5bd5fb5c28710231fd",
+        "95236a75300dcabe92b5b881cce01a41",
+        "9866e2d06822061c27b69381595caef3",
+        "9bf584cc287fefdf7e0695d722782d01"
+      ],
+      "close_negative_scenario_ids": [],
+      "close_negative_trace_ids": [],
+      "created_at": "2026-09-19T20:00:00Z",
+      "notes": "hold: fuzzy",
+      "history": [
+        {
+          "at": "2026-09-19T20:00:00Z",
+          "change": "created from axial pass 2 over batch1_uniform + batch2_intent (45 conversations)"
+        }
+      ]
+    }
+  ],
+  "parked": {
+    "widgets_and_links": {
+      "note": "12 open codes ask for order/product/ticket/policy widgets or links. Product backlog, not a failure mode: absent from every trace so it cannot be judged or measured.",
+      "annotation_ids": [
+        "mu7n41m0vdo3u",
+        "mu7mobjkxw4mb",
+        "mu7n5apj1ly2x",
+        "mu7ms8xe7dbzo",
+        "mu7mv3drdn0x9",
+        "mu7mwdosatv01",
+        "mu7my7zimfkzv",
+        "mu7mm2z7kjx3g",
+        "mu8zg1718e945",
+        "mu8zlzxu01v9j",
+        "mu8zxmdgdr82v",
+        "mu901s3t3i28a"
+      ]
+    },
+    "tool_design": {
+      "note": "find_order should return product title and store name (0053, 0248).",
+      "annotation_ids": [
+        "mu7mk4oyw7746",
+        "mu7mx5kub01aa"
+      ]
+    },
+    "singletons": {
+      "note": "one observation each; revisit after Batch 3",
+      "annotation_ids": [
+        "mu905ffzue1ry",
+        "mu7mutfz0jyhm",
+        "mu7mt2ce0ygz6",
+        "mu7mtzwc1sjf1"
+      ]
+    },
+    "reasoning_blocks_not_user_visible": {
+      "note": "Thinking blocks are intermediate model text; server returns final_output only. Notes kept as cost observations.",
+      "annotation_ids": [
+        "mu7lucx9rvl9e",
+        "mu7mrdbwizfbr"
+      ]
+    }
+  },
+  "revisions": [
+    {
+      "at": "2026-09-19T20:00:00Z",
+      "change": "axial pass 2: 10 candidates + 1 held; split verbose into restates_itself + verbose_reply; merged 0066/0134 into write_without_confirmation after checking find_order returned one match"
+    }
+  ]
+}
