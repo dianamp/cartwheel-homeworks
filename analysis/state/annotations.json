@@ -1790,12 +1790,13 @@
       "step": null,
       "seg": "reply",
       "quote": "Full refund submitted for approval",
-      "note": "Mention when they can expect it, link to the refund policy when issuing a refund.",
+      "note": "Mention when they can expect it, what the order is (show product widget), link to the refund policy when issuing a refund.",
       "kind": "open_code",
       "source": "human",
       "batch": "batch4_uniform",
       "novel": true,
-      "created_at": "2026-09-21T04:09:09Z"
+      "created_at": "2026-09-21T04:09:09Z",
+      "edited_at": "2026-09-21T16:28:24Z"
     },
     {
       "id": "muaq81e4sshi4",

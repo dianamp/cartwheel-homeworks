@@ -886,11 +886,16 @@ async function boot() {
   $('#source').textContent = `${S.status.source} · ${S.status.trace_count} traces / ${S.status.conversation_count} conversations`;
   const [list, man, ann, pat, sugg, labels, spec] = await Promise.all([api('/api/conversations'), api('/api/manifest'), api('/api/annotations'), api('/api/patterns'), api('/api/suggestions'), api('/api/labels'), api('/api/spec')]);
   S.list = list; S.manifest = man; S.annotations = ann.annotations || []; S.patterns = pat.modes ? pat : {modes: []}; S.suggestions = Array.isArray(sugg) ? sugg : []; S.labels = labels; S.spec = spec.text || '';
-  try { S.batch = localStorage.getItem('cw-batch') || 'all'; } catch (e) {}
+  // Deep link: ?batch=<batch name>&conv=<scenario id>&view=<review|labeling|taxonomy|...>
+  // e.g. http://localhost:8030/?batch=batch4_uniform&conv=support-0097
+  const qs = new URLSearchParams(location.search);
+  try { S.batch = qs.get('batch') || localStorage.getItem('cw-batch') || 'all'; } catch (e) { S.batch = qs.get('batch') || 'all'; }
   if (S.batch !== 'all' && S.batch !== 'unbatched' && !(S.manifest.batches || []).some(b => b.name === S.batch)) S.batch = 'all';
+  try { localStorage.setItem('cw-batch', S.batch); } catch (e) {}
   renderBatchSelect(); renderQueue(); $('#sugg-count').textContent = pendingCount();
-  let start = null; try { start = localStorage.getItem('cw-current'); } catch (e) {}
-  if (start && S.list.some(c => c.scenario_id === start)) openConv(start); else if (S.queue.length) openConv(S.queue[0]);
+  let start = qs.get('conv'); if (!start) { try { start = localStorage.getItem('cw-current'); } catch (e) {} }
+  if (start && S.list.some(c => c.scenario_id === start)) await openConv(start); else if (S.queue.length) await openConv(S.queue[0]);
+  const view = qs.get('view'); if (view && $$('#top .tabs button').some(b => b.dataset.view === view)) showView(view);
   setInterval(poll, 4000);
 }
 boot();

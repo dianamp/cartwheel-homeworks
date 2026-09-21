@@ -33,6 +33,10 @@ The first live run fetches the 313 traces listed in `traces/support_traces.json`
 
 Batches come from `analysis/state/sample_manifest.json` (`batches: [{name, method, reason, scenario_ids}]`) and drive the review queue.
 
+## Deep links
+
+`?batch=<batch name>&conv=<scenario id>&view=<tab>` opens a batch queue, a conversation, and a tab directly, e.g. `http://localhost:8030/?batch=batch4_uniform&conv=support-0097&view=review`.
+
 ## Keys
 
 `j` / `k` next / previous, `n` no failure observed and advance, `r` reviewed and advance, `a` focus the note box, `e` expand all tool results, `s` system prompt, `1`..`9`, `0` toggle mode N (0 = mode 10) in the Labeling view, `c` confirm all pairs on the conversation and advance, `Tab` next trace in Labeling, `?` key list.
