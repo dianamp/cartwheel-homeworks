@@ -6,3 +6,6 @@ The HW4 says
 but that wasn't what Shreya did in the lecture - it was more casual and faster - didn't need to constantly look up the codes in the spec.
 Can you speak to this more? How important is it to refer back to the requirements?
 And a lot of the comments weren't really in the spec, they were product ideas identified later when experiencing the app.  Speak to this again.
+
+### Comment
+Found that the final 15 when I focused on identifying new modes meant I wasn't just highlighting the old modes anymore. Was good to switch to "just check for new stuff"

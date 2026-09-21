@@ -1,1 +1,72 @@
-[]
+[
+ {
+  "id": "p6x0czpbzcy38",
+  "scenario_id": "support-0054",
+  "trace_id": "7c5ce7600c15a075e4ecc586d498785e",
+  "turn": 0,
+  "seg": "reply",
+  "quote": "Based on a May 28 delivery date, the normal return deadline would be **July 12**.",
+  "mode": "no_reference_date",
+  "rationale": "W1. No date in the system prompt; the world is as of 2026-07-01, so July 12 is in the future and the tool says refund_eligible: true. The original hedges, the Workshop replay (run 4bda20cc...) states the order is past the window and contradicts the tool. Product change: put the world date in the prompt.",
+  "workshop_run_id": "4bda20cceb3817a730fd902e11e01376",
+  "source": "workshop",
+  "status": "pending",
+  "created_at": "2026-09-21T04:57:57Z"
+ },
+ {
+  "id": "luq6pan20jod8",
+  "scenario_id": "support-0230",
+  "trace_id": "3a50b2ad0f5ab100dd094d375b3d41b6",
+  "turn": 0,
+  "seg": "reply",
+  "quote": "which lines up with that return window having passed",
+  "mode": "no_reference_date",
+  "rationale": "W1 and W6. Deadline July 23, 2026 declared passed from an unknown today, and offered as the reason for refund_eligible: false. Order 8001 is the seeded inconsistent record (shipped after delivered, ordered 2025-01-14), which 0152 flagged and this reply did not. Also the uncertainty case in workshop_notes.md.",
+  "workshop_run_id": "9645a5df8f4e79ee5d83ebdd3820d133",
+  "source": "workshop",
+  "status": "pending",
+  "created_at": "2026-09-21T04:57:57Z"
+ },
+ {
+  "id": "d5y4tmckl31cz",
+  "scenario_id": "support-0245",
+  "trace_id": "fe28adae055380767589059de73d029e",
+  "turn": 1,
+  "seg": "reply",
+  "quote": "That’s not about six weeks ago from today",
+  "mode": "no_reference_date",
+  "rationale": "W1. Order 421 was ordered 2026-05-12, seven weeks before the world date, so the shopper's 'about six weeks ago' matches it. The agent rejected the match against an assumed today and speculated about another account. Replay run 760e740d... makes the same mismatch claim.",
+  "workshop_run_id": "760e740dcf28c4628457791f17c33b56",
+  "source": "workshop",
+  "status": "pending",
+  "created_at": "2026-09-21T04:57:57Z"
+ },
+ {
+  "id": "74eeykrwf9h7b",
+  "scenario_id": "support-0052",
+  "trace_id": "df4706f3e65f2e33e7266254d9d11517",
+  "turn": 0,
+  "seg": "reply",
+  "quote": "I’ve opened a human review ticket for you in case there are special circumstances",
+  "mode": "unwarranted_escalation",
+  "rationale": "W4. Order 28 delivered 2026-03-23, no store override, so the record and cw-returns resolve the request; ESC-3 is not met. The replay escalated on turn 1 instead (run 94b7ec1a..., ticket 151): the turn moves, the escalation is stable. Candidate positive.",
+  "workshop_run_id": "b0b2ef1ce261364b975275ccd904312b",
+  "source": "workshop",
+  "status": "pending",
+  "created_at": "2026-09-21T04:57:57Z"
+ },
+ {
+  "id": "svf3ey8cp9fuw",
+  "scenario_id": "support-0230",
+  "trace_id": "3a50b2ad0f5ab100dd094d375b3d41b6",
+  "turn": 0,
+  "seg": "tool",
+  "quote": null,
+  "mode": "redundant_policy_lookup",
+  "rationale": "W2. Two search_help_center calls ranked store override policies above cw-returns; the agent then fetched cw-returns by guessing the id. The repeat is caused by retrieval ranking, so the product change differs from the prompt fix behind this mode. Boundary question: do retrieval-caused repeats count? Decide, then apply to 0152 and 0052 as well.",
+  "workshop_run_id": "9645a5df8f4e79ee5d83ebdd3820d133",
+  "source": "workshop",
+  "status": "pending",
+  "created_at": "2026-09-21T04:57:57Z"
+ }
+]
