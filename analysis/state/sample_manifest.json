@@ -694,6 +694,61 @@
         "67ca5956e4cfc57aa0cdc669cfab234a",
         "39ea9fe80e643bd559810cbdbb43a6a3"
       ]
+    },
+    {
+      "name": "batch4_uniform",
+      "method": "random.Random(20260920).sample over the 165 conversations not in any earlier batch; no signal of any kind",
+      "reason": "stability check after drafting the taxonomy: count how many of the 15 produce a previously unseen consequential mode",
+      "created_at": "2026-09-20",
+      "taxonomy_at_draw": [
+        "write_without_confirmation",
+        "assumes_instead_of_asking",
+        "unwarranted_escalation",
+        "redundant_policy_lookup",
+        "irrelevant_policy_nuance",
+        "unsolicited_next_steps",
+        "verbose_reply",
+        "first_person_framing"
+      ],
+      "scenario_ids": [
+        "support-0011",
+        "support-0052",
+        "support-0054",
+        "support-0097",
+        "support-0112",
+        "support-0117",
+        "support-0138",
+        "support-0152",
+        "support-0157",
+        "support-0169",
+        "support-0176",
+        "support-0183",
+        "support-0197",
+        "support-0230",
+        "support-0245"
+      ],
+      "trace_ids": [
+        "d63587734a8ed48b3fcec20764296e3c",
+        "b437803d98806f0766484854007212f2",
+        "df4706f3e65f2e33e7266254d9d11517",
+        "ae4dd475b14325494a30f8dcd19307e0",
+        "37c8aa38ce99878aeba5f74634b28eed",
+        "7c5ce7600c15a075e4ecc586d498785e",
+        "a92060ed0ad9b9a5a153163471f7deb7",
+        "ee63b464493a6669fb23da2b87c199ed",
+        "ffe3857a020e5c55ea953479e7157963",
+        "f241cce1c5036e643899d4dbc5cadcc4",
+        "bbcb26c2f1c272cfcc84223cf45f73ff",
+        "b6e6c26d8e41cd5a3900565e6500c6cd",
+        "f47303d80a62b6ffdaccc490ebe77db8",
+        "e197344ac6c0e5f811a4f3492c2b0239",
+        "b0dfb8375799e4889ae99afdec9d1beb",
+        "72c22852c63a4347dad88c260ddc54cd",
+        "3a50b2ad0f5ab100dd094d375b3d41b6",
+        "472ce4e000300d855e31b5622bb42c51",
+        "fe28adae055380767589059de73d029e",
+        "7d643bcbcfcfee52a1a34620a8f403ef"
+      ]
     }
   ]
 }

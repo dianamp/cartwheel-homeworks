@@ -123,9 +123,11 @@ Requirements that do not fit in the sections above, including tone and style gui
 - **RESP-3.** State when required information is missing or inconsistent, rather than inventing a value.
 - **RESP-4.** Explain refusals and escalations without revealing inaccessible order or user information.
 - **RESP-5.** Use direct and respectful language that explains the relevant decision.
-- **RESP-6.** When the user did not supply an order identifier, confirm the
-  specific order with the user before calling `issue_refund` or
-  `cancel_order`, even if the lookup returned a single match. A write on an
-  order the user identified by number needs no extra confirmation. *Added in
-  HW4 (2026-09-19); motivating annotations `mu7mmgcxyoyy9`, `mu8slrzj34cou`,
-  `mu8zkwthu47tq` (scenarios support-0053, support-0066, support-0134).*
+- **RESP-6.** Confirm the specific order and the requested action with the
+  user before calling `issue_refund` or `cancel_order`. This applies to every
+  role and whether or not the user supplied an order identifier: show the
+  matched order and ask for an explicit yes, then write. *Added in HW4
+  (2026-09-19); motivating annotations `mu7mmgcxyoyy9`, `mu8slrzj34cou`,
+  `mu8zkwthu47tq` (scenarios support-0053, support-0066, support-0134).
+  Widened to all roles and id-supplied requests on 2026-09-20 after
+  `mu7nmj66v7m6i` (support-0167) and `muaqepg297p7k` (support-0176).*

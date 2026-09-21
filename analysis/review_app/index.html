@@ -221,6 +221,7 @@
 <div id="popover">
   <div class="muted" style="font-size:11.5px" id="pop-quote"></div>
   <textarea id="pop-text" placeholder="What did you observe? Plain words, one failure."></textarea>
+  <label style="font-size:12px;display:flex;gap:6px;align-items:center;margin-top:4px"><input type="checkbox" id="pop-novel" style="width:auto;margin:0"> not covered by the current modes</label>
   <div class="row"><button class="small" id="pop-cancel">Cancel</button><button class="small primary" id="pop-save">Save (Enter)</button></div>
 </div>
 
@@ -429,11 +430,12 @@ function renderConv() {
     <textarea id="conv-note" placeholder="Open code for this conversation (not tied to a span)"></textarea>
     <div class="row">
       <button class="small primary" id="conv-note-save">Save note</button>
+      <label style="font-size:12px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="conv-novel" style="width:auto;margin:0"> not covered by the current modes</label>
       <button class="small" id="no-failure">No failure observed <kbd>n</kbd></button>
       <button class="small" id="mark-reviewed">Reviewed, next <kbd>r</kbd></button>
       <span class="muted" style="font-size:12px">${anns.length} annotation(s) on this conversation</span>
     </div>
-    <div class="conv-notes">${convNotes.map(a => `<div class="cn"><span class="txt">${a.kind === 'no_failure' ? '<i>no failure observed</i>' : esc(a.note)}</span><span class="muted" style="font-size:11px">${esc(a.source || 'human')}</span><button class="small" data-del="${a.id}">✕</button></div>`).join('')}</div>
+    <div class="conv-notes">${convNotes.map(a => `<div class="cn"><span class="txt">${a.novel ? '<b style="color:var(--challenge)">new? </b>' : ''}${a.kind === 'no_failure' ? '<i>no failure observed</i>' : esc(a.note)}</span><span class="muted" style="font-size:11px">${esc(a.source || 'human')}</span><button class="small" data-del="${a.id}">✕</button></div>`).join('')}</div>
   </div>`;
   $('#conv-col').innerHTML = html;
 
@@ -451,7 +453,7 @@ function renderConv() {
 function saveConvNote() {
   const txt = $('#conv-note').value.trim(); if (!txt) return;
   const c = S.convs[S.current];
-  S.annotations.push({id: uid(), scenario_id: S.current, trace_id: c.turns[0].trace_id, turn: null, step: null, seg: null, quote: null, note: txt, kind: 'open_code', source: 'human', batch: batchOf(S.current), created_at: now()});
+  S.annotations.push({id: uid(), scenario_id: S.current, trace_id: c.turns[0].trace_id, turn: null, step: null, seg: null, quote: null, note: txt, kind: 'open_code', source: 'human', batch: batchOf(S.current), novel: $('#conv-novel').checked || undefined, created_at: now()});
   saveState('annotations'); renderConv(); renderQueue(); toast('note saved');
 }
 function markNoFailure() {
@@ -486,7 +488,7 @@ document.addEventListener('mouseup', e => {
   const pop = $('#popover'); const r = (mark.isConnected ? mark : seg).getBoundingClientRect();
   pop.style.display = 'block'; pop.style.top = (window.scrollY + r.bottom + 6) + 'px'; pop.style.left = Math.min(window.scrollX + r.left, window.innerWidth - 340) + 'px';
   $('#pop-quote').textContent = '“' + text.slice(0, 140) + (text.length > 140 ? '…' : '') + '”';
-  $('#pop-text').value = ''; $('#pop-text').focus();
+  $('#pop-text').value = ''; $('#pop-novel').checked = false; $('#pop-text').focus();
 });
 function closePopover() {
   $('#popover').style.display = 'none';
@@ -500,7 +502,7 @@ document.addEventListener('mousedown', e => { if ($('#popover').style.display ==
 function savePopover() {
   const note = $('#pop-text').value.trim(); if (!note || !pending) return;
   const d = pending.seg.dataset;
-  S.annotations.push({id: uid(), scenario_id: S.current, trace_id: d.trace, turn: +d.turn, step: d.step != null ? +d.step : null, seg: d.seg, quote: pending.quote, note, kind: 'open_code', source: 'human', batch: batchOf(S.current), created_at: now()});
+  S.annotations.push({id: uid(), scenario_id: S.current, trace_id: d.trace, turn: +d.turn, step: d.step != null ? +d.step : null, seg: d.seg, quote: pending.quote, note, kind: 'open_code', source: 'human', batch: batchOf(S.current), novel: $('#pop-novel').checked || undefined, created_at: now()});
   saveState('annotations'); closePopover(); renderConv(); renderQueue(); toast('annotation saved');
 }
 
@@ -540,7 +542,7 @@ function applyHighlights() {
   }
   for (const it of items) {
     const div = document.createElement('div'); div.className = 'note ' + it.kind; div.dataset.ann = it.id;
-    if (it.kind === 'ann') div.innerHTML = `<div class="q">“${esc(it.a.quote)}”</div><div class="txt">${esc(it.a.note)}</div><div class="acts"><button class="small" data-edit>edit</button><button class="small" data-del>delete</button></div>`;
+    if (it.kind === 'ann') div.innerHTML = `<div class="q">“${esc(it.a.quote)}”</div>${it.a.novel ? '<div class="tag" style="color:var(--challenge)">new?</div>' : ''}<div class="txt">${esc(it.a.note)}</div><div class="acts"><button class="small" data-edit>edit</button><button class="small" data-del>delete</button></div>`;
     else div.innerHTML = `<div class="tag">agent suggestion · ${esc(it.s.mode || '')}</div>${it.s.quote ? `<div class="q">“${esc(it.s.quote)}”</div>` : ''}<div class="txt">${esc(it.s.rationale || it.s.note || '')}</div><div class="acts"><button class="small primary" data-acc>accept</button><button class="small" data-rej>reject</button></div>`;
     marginEl.appendChild(div); it.el = div;
     div.onmouseenter = () => { div.classList.add('hl'); $$(`mark[data-ann="${it.id}"]`).forEach(m => m.classList.add('hl')); };
@@ -616,7 +618,7 @@ function renderAnnotations() {
       <td class="muted" style="font-size:12px">${esc(a.batch || '')}</td>
       <td class="mono muted" style="font-size:11px">${a.quote ? `t${(a.turn ?? 0) + 1}${a.step != null ? ' s' + (a.step + 1) : ''} ${esc(a.seg || '')}` : 'conversation'}</td>
       <td style="font-size:12.5px;max-width:260px"><i>${esc(a.quote || '')}</i></td>
-      <td style="max-width:320px">${a.kind === 'no_failure' ? '<span class="muted">no failure observed</span>' : esc(a.note)}${a.source && a.source !== 'human' ? `<div class="muted" style="font-size:11px">${esc(a.source)}</div>` : ''}</td>
+      <td style="max-width:320px">${a.novel ? '<b style="color:var(--challenge)">new? </b>' : ''}${a.kind === 'no_failure' ? '<span class="muted">no failure observed</span>' : esc(a.note)}${a.source && a.source !== 'human' ? `<div class="muted" style="font-size:11px">${esc(a.source)}</div>` : ''}</td>
       <td><button class="small" data-del="${a.id}">✕</button></td></tr>`; }).join('') || '<tr><td colspan="7" class="muted">no annotations yet</td></tr>'}</table></div>`;
   $('#ann-filter').oninput = e => { S._annFilter = e.target.value; renderAnnotations(); const el = $('#ann-filter'); el.focus(); el.setSelectionRange(el.value.length, el.value.length); };
   $('#ann-filter').onkeydown = e => e.stopPropagation();
