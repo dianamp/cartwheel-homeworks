@@ -1,5 +1,7 @@
 # HW4 video prep (5 minutes, one take, no slides)
 
+Human Trace Review & Failure Taxomony
+
 Start the review app first: `uv run python -m analysis.review_app.server` (port 8030). To jump straight to a conversation, use a link like `http://localhost:8030/?batch=batch4_uniform&conv=support-0097` (add `&view=labeling` or `&view=taxonomy` for another tab). Have a terminal open in the repo for the two file sections.
 
 Open all links in brower: ```grep -o 'http://localhost:8030[^ )]*' homework/module-2/hw4-video-prep.md | xargs -n1 open```
