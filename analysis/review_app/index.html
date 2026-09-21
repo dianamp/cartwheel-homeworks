@@ -166,6 +166,27 @@
   .label-row .modes { display: flex; flex-wrap: wrap; gap: 6px; }
   .label-row .mode { display: inline-flex; align-items: center; gap: 4px; border: 1px solid var(--line); border-radius: 6px; padding: 2px 6px; font-size: 12.5px; background: #fafaf7; }
   .label-row .mode .n { font-family: var(--mono); color: var(--muted); }
+  .lab-head { position: sticky; top: 0; z-index: 5; display: flex; gap: 12px; align-items: center; background: var(--bg); padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .lab-card { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
+  .lab-card.focus { outline: 2px solid var(--ink); }
+  .lab-user { color: var(--user); font-weight: 600; margin-bottom: 6px; white-space: pre-wrap; }
+  .lab-tool { font-family: var(--mono); font-size: 11.5px; color: var(--tool); padding: 1px 0 1px 8px; border-left: 2px solid var(--line); }
+  .lab-tool.write { border-left-color: var(--error); color: var(--ink); }
+  .lab-reply { margin-top: 8px; font-size: 13.5px; line-height: 1.45; max-height: 340px; overflow: auto; padding-right: 6px; }
+  .lab-notes { margin-top: 8px; padding: 6px 8px; background: #fff8e1; border-left: 3px solid var(--annot); font-size: 12.5px; }
+  .lab-modes { display: flex; flex-direction: column; gap: 4px; align-self: start; position: sticky; top: 52px; }
+  .lab-pill { display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 6px; text-align: left; padding: 4px 8px; font-size: 12.5px; border-radius: 6px; }
+  .lab-pill .n { font-family: var(--mono); color: var(--muted); font-size: 11px; }
+  .lab-pill .v { font-family: var(--mono); font-size: 11px; }
+  .lab-pill.pass { background: #fafaf7; color: var(--muted); }
+  .lab-pill.pass .v { color: var(--ok); }
+  .lab-pill.fail { background: var(--error); color: #fff; border-color: var(--error); }
+  .lab-pill.fail .n, .lab-pill.fail .v { color: #fff; }
+  .lab-pill.prov { border-style: dashed; border-color: #9a9a94; border-width: 1.5px; }
+  .lab-pill.pass.done { border-color: var(--ok); }
+  .lab-pill.fail.prov { background: #fff; color: var(--error); }
+  .lab-pill.fail.prov .n, .lab-pill.fail.prov .v { color: var(--error); }
+  .lab-pill:hover { filter: brightness(0.96); }
   .lf { font-size: 11px; color: var(--muted); }
 </style>
 </head>
@@ -301,6 +322,8 @@ function buildQueue() {
   });
 }
 function finalModes() { const m = S.patterns.modes || []; const fin = m.filter(x => x.status === 'final'); return fin.length ? fin : m; }
+// Labeling can be scoped to a subset of final modes (patterns.json labeling_scope.modes); 'show all' overrides it for the session.
+function labelingModes() { const all = finalModes(); const sc = (S.patterns.labeling_scope || {}).modes; if (!sc || !sc.length || S.labelAllModes) return all; const set = new Set(sc); return all.filter(m => set.has(m.name)); }
 function labelFor(mode, traceId) { return (S.labels[mode] || []).find(r => r.trace_id === traceId); }
 
 // ---------------------------------------------------------------------------
@@ -470,7 +493,8 @@ function markNoFailure() {
 function deleteAnnotation(id) { S.annotations = S.annotations.filter(a => a.id !== id); saveState('annotations'); renderConv(); renderQueue(); }
 function nextConv(delta = 1) {
   const i = S.queue.indexOf(S.current); const j = Math.min(Math.max(i + delta, 0), S.queue.length - 1);
-  if (S.queue.length && (i === -1 || j !== i)) openConv(S.queue[i === -1 ? 0 : j]); else renderQueue();
+  if (S.queue.length && (i === -1 || j !== i)) openConv(S.queue[i === -1 ? 0 : j]);
+  else { toast(delta > 0 ? `end of the "${S.batch}" queue. Pick another batch.` : `start of the "${S.batch}" queue`); renderQueue(); }
 }
 
 // ---- text selection -> annotation ----------------------------------------
@@ -683,33 +707,68 @@ function modeForm(i) {
 // labeling
 // ---------------------------------------------------------------------------
 function renderLabeling() {
-  const modes = finalModes();
+  const modes = labelingModes(); const allCount = finalModes().length;
   const c = S.convs[S.current];
   if (!modes.length) { $('#labeling-page').innerHTML = '<p class="muted">No modes in the taxonomy yet.</p>'; return; }
   if (!c) { $('#labeling-page').innerHTML = '<p class="muted">Open a conversation in the Review view first.</p>'; return; }
-  const rows = c.turns.map((tr, ti) => `<div class="label-row ${ti === S.labelFocus ? 'focus' : ''}" data-ti="${ti}">
-    <div><div class="mono" style="font-size:12px">turn ${ti + 1} · ${tr.trace_id.slice(0, 12)}…</div><div class="muted" style="font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(tr.user.slice(0, 60))}</div></div>
-    <div class="modes">${modes.map((m, mi) => { const l = labelFor(m.name, tr.trace_id); return `<span class="mode"><span class="n">${(mi + 1) % 10}</span>${esc(m.name)}
-      <button class="small fail ${l && l.label === 1 ? (isProvisional(l) ? 'provisional' : 'active') : ''}" data-ti="${ti}" data-m="${esc(m.name)}" data-l="1">Fail</button><button class="small pass ${l && l.label === 0 ? (isProvisional(l) ? 'provisional' : 'active') : ''}" data-ti="${ti}" data-m="${esc(m.name)}" data-l="0">Pass</button></span>`; }).join('')}</div>
+  const pairState = (m, tid) => { const l = labelFor(m.name, tid); return !l ? 'none' : (isProvisional(l) ? 'prov' : 'done'); };
+  const unj = c.turns.reduce((n, tr) => n + modes.filter(m => pairState(m, tr.trace_id) !== 'done').length, 0);
+  const inQueue = S.queue.length ? S.queue : S.list.map(x => x.scenario_id);
+  const doneConvs = inQueue.filter(sid => { const cv = S.list.find(x => x.scenario_id === sid); return cv && (S.convs[sid] ? S.convs[sid].turns : []).length && S.convs[sid].turns.every(tr => modes.every(m => pairState(m, tr.trace_id) === 'done')); }).length;
+  const toolLine = call => {
+    const args = Object.entries(call.args || {}).filter(([, v]) => v !== null && v !== '').map(([k, v]) => `${k}=${typeof v === 'string' ? v : JSON.stringify(v)}`).join(', ');
+    const r = call.result || {}; let out = '';
+    if (r.error) out = `error: ${r.error}`;
+    else if (Array.isArray(r.orders)) out = `${r.orders.length} order(s)` + (r.orders.length && r.orders.length <= 3 ? ': ' + r.orders.map(o => `#${o.order_id} $${o.total_usd} ${o.status}${o.refund_eligible ? ' eligible' : ''}`).join('; ') : '');
+    else if (r.order) out = `#${r.order.order_id} ${r.order.store_name || ''} $${r.order.total_usd} ${r.order.status}, delivered ${r.order.delivered_at || '-'}, ${r.order.refund_eligible ? 'eligible' : 'not eligible'}`;
+    else if (Array.isArray(r.results)) out = r.results.slice(0, 3).map(x => x.policy_id).join(', ') + (r.results.length > 3 ? ', …' : '');
+    else if (r.policy_id && r.body) out = `${r.policy_id} (${r.body.length} chars)`;
+    else if (r.return_window_days !== undefined) out = `${r.store_name || ''}: ${r.return_window_days} days${r.has_override ? ' (override)' : ''}`;
+    else if (Array.isArray(r.products)) out = `${r.products.length} product(s)`;
+    else if (r.status || r.ticket_id) out = [r.status, r.ticket_id ? `ticket ${r.ticket_id}` : null, r.refund_id ? `refund ${r.refund_id}` : null, r.amount_usd ? `$${r.amount_usd}` : null].filter(Boolean).join(' · ');
+    else out = JSON.stringify(r).slice(0, 90);
+    const isWrite = ['issue_refund', 'cancel_order', 'escalate_to_human'].includes(call.name);
+    return `<div class="lab-tool ${isWrite ? 'write' : ''}"><b>${esc(call.name)}</b>(${esc(args.slice(0, 80))}) <span class="muted">→ ${esc(out)}</span></div>`;
+  };
+  const notes = tr => annsFor(c.scenario_id).filter(a => a.trace_id === tr.trace_id && a.kind !== 'no_failure');
+  const cards = c.turns.map((tr, ti) => `<div class="lab-card ${ti === S.labelFocus ? 'focus' : ''}" data-ti="${ti}">
+    <div class="lab-conv">
+      <div class="lab-user">${esc(tr.user)}</div>
+      ${(tr.steps || []).flatMap(st => st.calls || []).map(toolLine).join('')}
+      <div class="lab-reply">${md(tr.reply || '')}</div>
+      ${notes(tr).length ? `<div class="lab-notes">${notes(tr).map(a => `<div>${a.quote ? `<i>“${esc(a.quote.slice(0, 90))}”</i> ` : ''}${esc(a.note)}</div>`).join('')}</div>` : ''}
+    </div>
+    <div class="lab-modes">
+      <div class="muted" style="font-size:11.5px;margin-bottom:4px">turn ${ti + 1} of ${c.turns.length}</div>
+      ${modes.map((m, mi) => { const l = labelFor(m.name, tr.trace_id); const fail = l && l.label === 1; const st = pairState(m, tr.trace_id);
+        return `<button class="lab-pill ${fail ? 'fail' : 'pass'} ${st}" data-ti="${ti}" data-m="${esc(m.name)}" data-l="${fail ? 0 : 1}" title="${esc(m.definition || '')}"><span class="n">${(mi + 1) % 10}</span><span class="nm">${esc(m.name.replace(/_/g, ' '))}</span><span class="v">${fail ? 'FAIL' : 'pass'}</span></button>`; }).join('')}
+    </div>
   </div>`).join('');
-  const unj = c.turns.reduce((n, tr) => n + modes.filter(m => { const l = labelFor(m.name, tr.trace_id); return !l || isProvisional(l); }).length, 0);
-  $('#labeling-page').innerHTML = `<div style="display:flex;gap:10px;align-items:baseline"><h2 style="margin:0">Labeling · <span class="mono">${c.scenario_id}</span></h2><span class="muted">${unj} unconfirmed pair(s) here · dashed = provisional (derived from the taxonomy), solid = confirmed by you · confirming writes a Langfuse score and a line in labels/</span><span style="flex:1"></span><button class="small" id="lab-prev">← prev</button><button class="small primary" id="lab-confirm" ${unj ? '' : 'disabled'}>confirm all ${unj} on this conversation</button><button class="small" id="lab-next">next →</button></div>
-    <p class="muted" style="font-size:12.5px">Keys: <kbd>1</kbd>..<kbd>9</kbd>, <kbd>0</kbd> toggle Fail / Pass for mode N (0 = mode 10) on the focused turn, <kbd>c</kbd> confirm all pairs on this conversation and advance, <kbd>Tab</kbd> moves focus, <kbd>j</kbd>/<kbd>k</kbd> change conversation.</p>
-    <div class="label-grid">${rows}</div>
-    <div class="card" style="margin-top:12px"><h3>Evidence</h3>${annsFor(c.scenario_id).map(a => `<div style="font-size:13px">${a.quote ? `<i>“${esc(a.quote.slice(0, 120))}”</i> · ` : ''}${esc(a.note)}</div>`).join('') || '<span class="muted">no annotations</span>'}
-      <div style="margin-top:8px"><span class="linkish" id="lab-open">open in Review view</span></div></div>
+  const t = c.tuple || {};
+  $('#labeling-page').innerHTML = `<div class="lab-head">
+      <div><b class="mono">${esc(c.scenario_id)}</b> <span class="muted">· ${esc(c.role || '')} · ${esc(t.intent || '')} · ${esc(batchOf(c.scenario_id) || 'unbatched')}</span></div>
+      <div class="muted">${doneConvs}/${inQueue.length} conversations confirmed · ${unj} pair(s) open here · ${modes.length < allCount ? `<span class="linkish" id="lab-scope">${modes.length} of ${allCount} modes (show all)</span>` : (S.labelAllModes ? `<span class="linkish" id="lab-scope">all ${allCount} modes (back to scope)</span>` : `${allCount} modes`)}</div>
+      <span style="flex:1"></span>
+      <select id="lab-batch" class="small" style="width:auto"></select>
+      <button class="small" id="lab-prev">← prev</button>
+      <button class="primary" id="lab-confirm" ${unj ? '' : 'disabled'}>${unj ? `Confirm all ${unj} & next` : 'All confirmed'} <kbd>c</kbd></button>
+      <button class="small" id="lab-next">next →</button>
+    </div>
+    <p class="muted" style="font-size:12px;margin:6px 0 10px">Click a pill to flip it. Dashed = not yet confirmed (FAILs come from your notes, passes mean nothing flagged it yet). Confirm saves every dashed pill as shown. Keys: <kbd>1</kbd>..<kbd>9</kbd>,<kbd>0</kbd> flip mode N on the outlined turn · <kbd>Tab</kbd> next turn · <kbd>c</kbd> confirm and advance · <kbd>j</kbd>/<kbd>k</kbd> skip. Hover a pill for the definition.</p>
+    ${cards}
     <div id="lab-log" class="lf"></div>`;
-  $$('#labeling-page button[data-m]').forEach(b => b.onclick = () => setLabel(+b.dataset.ti, b.dataset.m, +b.dataset.l));
-  $$('#labeling-page .label-row').forEach(r => r.onclick = () => { S.labelFocus = +r.dataset.ti; $$('.label-row').forEach(x => x.classList.toggle('focus', +x.dataset.ti === S.labelFocus)); });
+  $$('#labeling-page button[data-m]').forEach(b => b.onclick = e => { e.stopPropagation(); setLabel(+b.dataset.ti, b.dataset.m, +b.dataset.l); });
+  $$('#labeling-page .lab-card').forEach(r => r.onclick = () => { S.labelFocus = +r.dataset.ti; $$('.lab-card').forEach(x => x.classList.toggle('focus', +x.dataset.ti === S.labelFocus)); });
   $('#lab-prev').onclick = () => nextConv(-1); $('#lab-next').onclick = () => nextConv(1);
   $('#lab-confirm').onclick = () => confirmConversation();
-  $('#lab-open').onclick = () => showView('review');
+  const sc = $('#lab-scope'); if (sc) sc.onclick = () => { S.labelAllModes = !S.labelAllModes; renderLabeling(); };
+  const lb = $('#lab-batch'); const src = $('#batch-select'); if (lb && src) { lb.innerHTML = src.innerHTML; lb.value = S.batch; lb.onchange = () => { src.value = lb.value; src.dispatchEvent(new Event('change')); nextUnconfirmed(); }; }
 }
 function isProvisional(l) { return !!l && l.source !== 'human'; }
 // Re-save every provisional pair on the current conversation as a human label (writes the
 // Langfuse score), keeping whatever value is shown, then move to the next conversation.
 async function confirmConversation() {
-  const c = S.convs[S.current]; if (!c) return; const modes = finalModes(); let n = 0, failed = 0;
+  const c = S.convs[S.current]; if (!c) return; const modes = labelingModes(); let n = 0, failed = 0;
   for (const tr of c.turns) for (const m of modes) {
     const l = labelFor(m.name, tr.trace_id); if (l && !isProvisional(l)) continue;
     const label = l ? l.label : 0;
@@ -718,7 +777,19 @@ async function confirmConversation() {
     catch (e) { failed++; }
   }
   toast(`confirmed ${n} pair(s)${failed ? `, ${failed} failed` : ''}`); renderLabeling();
-  if (!failed) nextConv(1);
+  if (!failed) nextUnconfirmed();
+}
+// Next conversation in the current queue with at least one unconfirmed pair (wraps around).
+async function nextUnconfirmed() {
+  const modes = labelingModes(); const q = S.queue.length ? S.queue : S.list.map(x => x.scenario_id);
+  const i = q.indexOf(S.current); const order = q.slice(i + 1).concat(q.slice(0, i + 1));
+  for (const sid of order) {
+    if (!S.convs[sid]) S.convs[sid] = await api('/api/conversation/' + sid);
+    const open = S.convs[sid].turns.some(tr => modes.some(m => { const l = labelFor(m.name, tr.trace_id); return !l || isProvisional(l); }));
+    if (open) { openConv(sid); return; }
+  }
+  toast(`every conversation in "${S.batch}" is confirmed for these modes. Pick another batch.`);
+  renderLabeling();
 }
 async function setLabel(ti, mode, label) {
   const c = S.convs[S.current]; const tr = c.turns[ti];
@@ -792,7 +863,7 @@ document.addEventListener('keydown', e => {
     else if (e.key === 'e') { S.expandAll = !S.expandAll; renderConv(); }
     else if (e.key === 's') { const p = $('#sysprompt'); if (p) p.classList.toggle('open'); }
   } else if (S.view === 'labeling') {
-    const modes = finalModes(); const c = S.convs[S.current]; if (!c) return;
+    const modes = labelingModes(); const c = S.convs[S.current]; if (!c) return;
     if (e.key === 'Tab') { e.preventDefault(); S.labelFocus = (S.labelFocus + 1) % c.turns.length; renderLabeling(); return; }
     if (e.key === 'c') { confirmConversation(); return; }
     const n = e.key === '0' ? 10 : parseInt(e.key, 10);

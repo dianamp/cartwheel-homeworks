@@ -1169,5 +1169,22 @@
         "support-0064 (first_person_framing)"
       ]
     }
-  ]
+  ],
+  "labeling_scope": {
+    "modes": [
+      "write_without_confirmation",
+      "verbose_reply",
+      "redundant_policy_lookup",
+      "unwarranted_escalation",
+      "unsolicited_next_steps"
+    ],
+    "set_at": "2026-09-21T09:00:00Z",
+    "reason": "Reviewer chose to label the five modes with the most confirmed positives first (HW5 needs 30 Fail labels per judged mode). The other five final modes stay in the taxonomy; their provisional labels remain unconfirmed until scope is widened.",
+    "exceptions": [
+      {
+        "scenario_id": "support-0192",
+        "note": "20-turn conversation (batch1_clusters); reviewer confirmed 2 turns and left the other 18 provisional by decision on 2026-09-21. Reported as partially labeled in review_summary.md."
+      }
+    ]
+  }
 }
