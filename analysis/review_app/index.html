@@ -586,6 +586,17 @@ function decideSuggestion(id, status) {
   saveState('suggestions'); toast('suggestion ' + status);
   if (S.view === 'review') { renderConv(); renderQueue(); } else renderSuggestions();
   $('#sugg-count').textContent = pendingCount();
+  if (S.view === 'review' && S.current === s.scenario_id) advanceToNextPending();
+}
+// After the last pending suggestion in a conversation is decided, open the next
+// conversation that still has one (list order, wrapping), so review needs fewer clicks.
+function advanceToNextPending() {
+  const hasPending = sid => S.suggestions.some(x => x.scenario_id === sid && x.status === 'pending');
+  if (hasPending(S.current)) return;
+  const order = S.list.map(c => c.scenario_id); const i = order.indexOf(S.current);
+  const rotated = order.slice(i + 1).concat(order.slice(0, i + 1));
+  const next = rotated.find(hasPending);
+  if (next) openConv(next); else toast('no pending suggestions left');
 }
 function pendingCount() { const n = S.suggestions.filter(s => s.status === 'pending').length; return n ? `(${n})` : ''; }
 function renderSuggestions() {

@@ -131,6 +131,10 @@
         {
           "at": "2026-09-21T01:20:00Z",
           "change": "five former close negatives moved to positives under the widened RESP-6: support-0155, support-0243, support-0078, support-0140, support-0097. Positives now 26."
+        },
+        {
+          "at": "2026-09-21T07:00:00Z",
+          "change": "human open code muaubkcmnv59k on close negative 0191: an acceptable confirmation names the order number or uses the order widget, not the product name (same reading as the 0029 rejection). Close-negative status unchanged (no write happened); candidate wording for RESP-6."
         }
       ],
       "former_close_negatives": {
@@ -295,6 +299,10 @@
         {
           "at": "2026-09-21T00:30:00Z",
           "change": "Workshop suggestion W4 accepted: support-0052 turn 0 (ticket opened for an order months past the window; ESC-3 not met)."
+        },
+        {
+          "at": "2026-09-21T07:00:00Z",
+          "change": "human open code muau73ij7w4k8 (support-0200 turn 1, ticket opened to speed up a payout for a refund already issued) linked as an origin annotation; the trace was already a positive. Count unchanged at 10."
         }
       ]
     },
@@ -729,19 +737,48 @@
       "positive_scenario_ids": [
         "support-0054",
         "support-0230",
-        "support-0245"
+        "support-0245",
+        "support-0216",
+        "support-0103",
+        "support-0109"
       ],
       "positive_trace_ids": [
         "7c5ce7600c15a075e4ecc586d498785e",
         "3a50b2ad0f5ab100dd094d375b3d41b6",
-        "fe28adae055380767589059de73d029e"
+        "fe28adae055380767589059de73d029e",
+        "82892f7bbc217c02ce51cfafa4de058f",
+        "1c303c23853df10222595fe6ecd94979",
+        "dbf21fb25dbbefcfbe8211fa08727826"
       ],
-      "close_negative_scenario_ids": [],
-      "close_negative_trace_ids": [],
+      "close_negative_scenario_ids": [
+        "support-0064",
+        "support-0137",
+        "support-0151",
+        "support-0217",
+        "support-0173",
+        "support-0183"
+      ],
+      "close_negative_trace_ids": [
+        "5679b45d6e47d3900d2653280d6f878d",
+        "d02b5b8c9813b199e6512d5dea2ce8f4",
+        "63d661ee55a9e72220cc400fc772903a",
+        "1d64910a303986a1ecc4e7f95fb341aa",
+        "281b031bad676fb84b647bfd8a96169d",
+        "b0dfb8375799e4889ae99afdec9d1beb"
+      ],
       "origin_annotation_ids": [
         "muat4ln8zme38",
         "muat6waaziwzz",
-        "muat8yknal4y1"
+        "muat8yknal4y1",
+        "muaunp2nnnaud",
+        "muauozz3bcka0",
+        "muaupjynog7yz",
+        "muauqja2wg712",
+        "muaur6e883tue",
+        "muaurhh50msa5",
+        "muaurvkkzgwxa",
+        "muausay7sx5q2",
+        "muatzbixwna58"
       ],
       "created_at": "2026-09-21T00:30:00Z",
       "notes": "Promoted to final on 2026-09-21 (ninth mode, above the handout's 5 to 8 range by reviewer decision). From Workshop Part C, W1.",
@@ -753,6 +790,10 @@
         {
           "at": "2026-09-21T01:00:00Z",
           "change": "promoted to final by the reviewer; symptom-based definition per the AgentDebug comparison; RESP-7 added to SPEC.md"
+        },
+        {
+          "at": "2026-09-21T07:00:00Z",
+          "change": "search (deadline statements vs. world date and refund_eligible): reviewer accepted positives support-0216, support-0103, support-0109 t1 (human open code); close negatives support-0064, support-0137, support-0151, support-0217, support-0173, support-0183. Positives 6, close negatives 6."
         }
       ]
     }
@@ -783,7 +824,7 @@
       ]
     },
     "tool_design": {
-      "note": "find_order returns order ids without product title or store name, so the agent calls get_order on every match just to identify the item (6 observations). Fix is a tool change (TOOL-6 contract), not agent behavior; backlog, not a mode. Also: search_help_center returns snippets, so the agent fetches the full policy afterwards (0052).",
+      "note": "find_order returns order ids without product title or store name, so the agent calls get_order on every match just to identify the item (6 observations). Fix is a tool change (TOOL-6 contract), not agent behavior; backlog, not a mode. Also: search_help_center returns snippets, so the agent fetches the full policy afterwards (0052). 2026-09-21: 0109 (muatyu217ix20) asks list_my_orders to return product title and store name; same item.",
       "annotation_ids": [
         "mu7mk4oyw7746",
         "mu7mx5kub01aa",
@@ -793,16 +834,18 @@
         "muaoh484rabaa",
         "muaix8dn5cgy7",
         "mu7nften2mne7",
-        "muaq1x8wsli41"
+        "muaq1x8wsli41",
+        "muatyu217ix20"
       ]
     },
     "singletons": {
-      "note": "one observation each; revisit after Batch 3",
+      "note": "one observation each; revisit after Batch 3 2026-09-21: 0137 (muauqgoyggv6w) deadline stated as 'around June 30' instead of an exact date; one observation.",
       "annotation_ids": [
         "mu905ffzue1ry",
         "mu7mutfz0jyhm",
         "mu7mt2ce0ygz6",
-        "mu7mtzwc1sjf1"
+        "mu7mtzwc1sjf1",
+        "muauqgoyggv6w"
       ]
     },
     "reasoning_blocks_not_user_visible": {
@@ -860,6 +903,10 @@
     {
       "at": "2026-09-21T01:00:00Z",
       "change": "ninth mode no_reference_date added from Workshop W1 (0054, 0230, 0245 turn 1); redundant_policy_lookup boundary clarified after the 0230 conflict (ranking-caused repeats count); SPEC: RESP-7 new, TOOL-1 search returns full text."
+    },
+    {
+      "at": "2026-09-21T07:00:00Z",
+      "change": "no_reference_date: 6 positives / 6 close negatives after search and one human open code (0109 t1); unwarranted_escalation +0200 t1; incomplete_write_outcome backup now has 4 positives and 1 close negative (decision pending)."
     }
   ],
   "merged": [
@@ -978,7 +1025,25 @@
           "at": "2026-09-20T21:00:00Z",
           "change": "recorded as backup after the Batch 4 stability check"
         }
-      ]
+      ],
+      "additional_evidence": [
+        {
+          "annotation_id": "muatrin1wtt1v",
+          "scenario_id": "support-0066",
+          "note": "refund confirmation lacks order number, product, store, status"
+        },
+        {
+          "annotation_id": "muatq1lopvwep",
+          "scenario_id": "support-0056",
+          "note": "status reply omits the standard order fields even for a short-answer request; widens the pattern from writes to status replies"
+        },
+        {
+          "annotation_id": "muatos5lbk8g6",
+          "scenario_id": "support-0021",
+          "note": "close negative: refund confirmation with order, amount, status and timing"
+        }
+      ],
+      "note_2026_09_21": "Now 4 candidate positives (0097, 0140, 0066, 0056) and 1 close negative (0021). Reviewer decision pending: promote as 'incomplete_outcome_report' (a tenth mode) or keep as backup."
     }
   ],
   "stability_check": {
