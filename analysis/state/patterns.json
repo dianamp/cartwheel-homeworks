@@ -3,9 +3,9 @@
     {
       "name": "write_without_confirmation",
       "status": "final",
-      "definition": "issue_refund or cancel_order is called without the user having explicitly confirmed the specific order and the action in a prior turn (after the agent showed the matched order). Applies to every role, whether or not the user supplied an order identifier.",
-      "boundary": "Nearest: assumes_instead_of_asking. That mode is about ambiguity of the request; this one fires on any write that lacks an explicit confirmation turn, even when the request was unambiguous and the order id was given. A write preceded by 'do you want me to refund #1234?' and a yes is absent. Rejected an earlier role/id-based boundary after 0167 and 0176.",
-      "spec_source": "RESP-6 (new, widened 2026-09-20): confirm order and action before any write",
+      "definition": "issue_refund or cancel_order is called without a prior turn in which the agent showed the matched order (product title, store, price, status) and the user confirmed it by selecting the order widget or stating that order's number. Applies to every role, whether or not the user supplied an order identifier in the request. A bare yes, a product name, or a description does not count as confirmation.",
+      "boundary": "Nearest: assumes_instead_of_asking. That mode is about ambiguity of the request; this one fires on any write that lacks the confirmation turn, even when the request was unambiguous and the order id was given. Absent: agent shows the order, user replies with that order number (or selects the widget), agent writes. Also absent: agent shows the order and asks, and no write follows (0124, 0020, 0082, 0011 t0). Asking for a product name instead of the order number is a weaker ask (0191, 0029) but still not this mode while no write happens. Tightened 2026-09-21 from 'explicit yes' to 'order number or widget'.",
+      "spec_source": "RESP-6 (new 2026-09-19, widened 2026-09-20, confirmation form tightened 2026-09-21): show the order, confirm by widget or order number, then write",
       "evaluator": "code_check",
       "origin_annotation_ids": [
         "mu7mmgcxyoyy9",
@@ -65,7 +65,7 @@
       ],
       "positive_trace_ids": [
         "23a9eb1fee7a0c5015b719476455b59a",
-        "286855650ab4bac13a20394023c19cb5",
+        "d9316f4f0b7b95498afa976dedf230df",
         "4c81b37b334a1935ccd51ddd43f7c017",
         "5d6e74bd0f2c3712ef553e1b3e6a348d",
         "891be4deb9dc6edd8ba871ee3d54500a",
@@ -135,6 +135,14 @@
         {
           "at": "2026-09-21T07:00:00Z",
           "change": "human open code muaubkcmnv59k on close negative 0191: an acceptable confirmation names the order number or uses the order widget, not the product name (same reading as the 0029 rejection). Close-negative status unchanged (no write happened); candidate wording for RESP-6."
+        },
+        {
+          "at": "2026-09-21T07:30:00Z",
+          "change": "definition tightened: confirmation means the user selects the shown order widget or states the shown order's number; a bare yes or a product name no longer counts (0191 note muaubkcmnv59k, 0029 rejection, 0011 t1). Search repeated, see searches[]."
+        },
+        {
+          "at": "2026-09-21T08:00:00Z",
+          "change": "support-0035 positive trace id corrected to the turn that holds cancel_order (d9316f4f...), was the turn-1 trace."
         }
       ],
       "former_close_negatives": {
@@ -796,6 +804,51 @@
           "change": "search (deadline statements vs. world date and refund_eligible): reviewer accepted positives support-0216, support-0103, support-0109 t1 (human open code); close negatives support-0064, support-0137, support-0151, support-0217, support-0173, support-0183. Positives 6, close negatives 6."
         }
       ]
+    },
+    {
+      "name": "incomplete_outcome_report",
+      "status": "final",
+      "definition": "A reply that reports the result of issue_refund or cancel_order, or answers an order status question, omits one or more of the required fields: the order (number, product, store), the amount or status, what happens next (auto-approved, queued for human review, cancelled), and the expected timing. Applies whether or not the user asked for a short answer.",
+      "boundary": "Nearest: verbose_reply (too much) and first_person_framing (how the outcome is phrased). This mode is about too little: the required facts are missing, however short or long the reply. A short reply that contains all required fields is absent (0021). All four positives so far follow a 'short plain answer' request, so the boundary with 'the user asked for brevity' matters: brevity removes filler, not the required fields.",
+      "spec_source": "RESP-8 (new, 2026-09-21): required fields in outcome and status replies; ESC-1 (the agent explains the result)",
+      "evaluator": "llm_judge",
+      "positive_scenario_ids": [
+        "support-0097",
+        "support-0140",
+        "support-0066",
+        "support-0056"
+      ],
+      "positive_trace_ids": [
+        "a92060ed0ad9b9a5a153163471f7deb7",
+        "40d0f6aacf480458663c499339224483",
+        "fa015c4d50cc0ef5aedd2358b3704a6b",
+        "c7c6dfc2258d37d9e29f607f76399dc6"
+      ],
+      "close_negative_scenario_ids": [
+        "support-0021"
+      ],
+      "close_negative_trace_ids": [
+        "f1dfad5e6c236ee85a99e7ff9c79fff9"
+      ],
+      "origin_annotation_ids": [
+        "muaq7890a3n0s",
+        "muaofr28xbm7o",
+        "muatrin1wtt1v",
+        "muatq1lopvwep",
+        "muatos5lbk8g6"
+      ],
+      "created_at": "2026-09-21T08:00:00Z",
+      "notes": "Promoted from backup mode incomplete_write_outcome on 2026-09-21 (tenth mode, above the handout's 5 to 8 range by reviewer decision). Widened from write confirmations to status replies after 0056.",
+      "history": [
+        {
+          "at": "2026-09-20T21:00:00Z",
+          "change": "recorded as backup after the Batch 4 stability check"
+        },
+        {
+          "at": "2026-09-21T08:00:00Z",
+          "change": "promoted to final and renamed from incomplete_write_outcome; positives 0097, 0140, 0066, 0056; close negative 0021; two more close negatives still to be found."
+        }
+      ]
     }
   ],
   "parked": {
@@ -907,6 +960,10 @@
     {
       "at": "2026-09-21T07:00:00Z",
       "change": "no_reference_date: 6 positives / 6 close negatives after search and one human open code (0109 t1); unwarranted_escalation +0200 t1; incomplete_write_outcome backup now has 4 positives and 1 close negative (decision pending)."
+    },
+    {
+      "at": "2026-09-21T08:00:00Z",
+      "change": "tenth mode incomplete_outcome_report promoted from backup; RESP-8 added; RESP-6 confirmation form tightened and write search repeated (51 writes, 0 confirmed, positives unchanged)."
     }
   ],
   "merged": [
@@ -1007,7 +1064,7 @@
   "backup_modes": [
     {
       "name": "incomplete_write_outcome",
-      "status": "backup",
+      "status": "promoted",
       "definition": "After issue_refund or cancel_order, the reply does not state the resulting status and what happens next (approval step, expected timing), or does not point to the refund policy.",
       "spec_source": "ESC-1 (the agent explains the result); candidate SPEC guidance on post-write replies",
       "evaluator": "llm_judge",
@@ -1043,7 +1100,9 @@
           "note": "close negative: refund confirmation with order, amount, status and timing"
         }
       ],
-      "note_2026_09_21": "Now 4 candidate positives (0097, 0140, 0066, 0056) and 1 close negative (0021). Reviewer decision pending: promote as 'incomplete_outcome_report' (a tenth mode) or keep as backup."
+      "note_2026_09_21": "Now 4 candidate positives (0097, 0140, 0066, 0056) and 1 close negative (0021). Reviewer decision pending: promote as 'incomplete_outcome_report' (a tenth mode) or keep as backup.",
+      "promoted_as": "incomplete_outcome_report",
+      "promoted_at": "2026-09-21T08:00:00Z"
     }
   ],
   "stability_check": {

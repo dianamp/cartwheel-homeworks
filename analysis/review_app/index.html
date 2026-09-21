@@ -20,6 +20,8 @@
   button.small { padding: 2px 7px; font-size: 12px; }
   button.fail.active { background: var(--error); color: #fff; border-color: var(--error); }
   button.pass.active { background: var(--ok); color: #fff; border-color: var(--ok); }
+  button.fail.provisional { background: #fff; color: var(--error); border: 1px dashed var(--error); }
+  button.pass.provisional { background: #fff; color: var(--ok); border: 1px dashed var(--ok); }
   input, textarea, select { font: inherit; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; width: 100%; background: #fff; }
   textarea { resize: vertical; min-height: 56px; }
   kbd { font: 11px var(--mono); background: #eee; border: 1px solid #ccc; border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; }
@@ -687,12 +689,12 @@ function renderLabeling() {
   if (!c) { $('#labeling-page').innerHTML = '<p class="muted">Open a conversation in the Review view first.</p>'; return; }
   const rows = c.turns.map((tr, ti) => `<div class="label-row ${ti === S.labelFocus ? 'focus' : ''}" data-ti="${ti}">
     <div><div class="mono" style="font-size:12px">turn ${ti + 1} · ${tr.trace_id.slice(0, 12)}…</div><div class="muted" style="font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(tr.user.slice(0, 60))}</div></div>
-    <div class="modes">${modes.map((m, mi) => { const l = labelFor(m.name, tr.trace_id); return `<span class="mode"><span class="n">${mi + 1}</span>${esc(m.name)}
-      <button class="small fail ${l && l.label === 1 ? 'active' : ''}" data-ti="${ti}" data-m="${esc(m.name)}" data-l="1">Fail</button><button class="small pass ${l && l.label === 0 ? 'active' : ''}" data-ti="${ti}" data-m="${esc(m.name)}" data-l="0">Pass</button></span>`; }).join('')}</div>
+    <div class="modes">${modes.map((m, mi) => { const l = labelFor(m.name, tr.trace_id); return `<span class="mode"><span class="n">${(mi + 1) % 10}</span>${esc(m.name)}
+      <button class="small fail ${l && l.label === 1 ? (isProvisional(l) ? 'provisional' : 'active') : ''}" data-ti="${ti}" data-m="${esc(m.name)}" data-l="1">Fail</button><button class="small pass ${l && l.label === 0 ? (isProvisional(l) ? 'provisional' : 'active') : ''}" data-ti="${ti}" data-m="${esc(m.name)}" data-l="0">Pass</button></span>`; }).join('')}</div>
   </div>`).join('');
-  const unj = c.turns.reduce((n, tr) => n + modes.filter(m => !labelFor(m.name, tr.trace_id)).length, 0);
-  $('#labeling-page').innerHTML = `<div style="display:flex;gap:10px;align-items:baseline"><h2 style="margin:0">Labeling · <span class="mono">${c.scenario_id}</span></h2><span class="muted">${unj} unjudged pair(s) here · Fail = failure present, Pass = absent · every judgment writes a Langfuse score and a line in labels/</span><span style="flex:1"></span><button class="small" id="lab-prev">← prev</button><button class="small" id="lab-next">next →</button></div>
-    <p class="muted" style="font-size:12.5px">Keys: <kbd>1</kbd>..<kbd>${Math.min(modes.length, 8)}</kbd> toggle Fail / Pass for mode N on the focused turn, <kbd>Tab</kbd> moves focus, <kbd>j</kbd>/<kbd>k</kbd> change conversation.</p>
+  const unj = c.turns.reduce((n, tr) => n + modes.filter(m => { const l = labelFor(m.name, tr.trace_id); return !l || isProvisional(l); }).length, 0);
+  $('#labeling-page').innerHTML = `<div style="display:flex;gap:10px;align-items:baseline"><h2 style="margin:0">Labeling · <span class="mono">${c.scenario_id}</span></h2><span class="muted">${unj} unconfirmed pair(s) here · dashed = provisional (derived from the taxonomy), solid = confirmed by you · confirming writes a Langfuse score and a line in labels/</span><span style="flex:1"></span><button class="small" id="lab-prev">← prev</button><button class="small primary" id="lab-confirm" ${unj ? '' : 'disabled'}>confirm all ${unj} on this conversation</button><button class="small" id="lab-next">next →</button></div>
+    <p class="muted" style="font-size:12.5px">Keys: <kbd>1</kbd>..<kbd>9</kbd>, <kbd>0</kbd> toggle Fail / Pass for mode N (0 = mode 10) on the focused turn, <kbd>c</kbd> confirm all pairs on this conversation and advance, <kbd>Tab</kbd> moves focus, <kbd>j</kbd>/<kbd>k</kbd> change conversation.</p>
     <div class="label-grid">${rows}</div>
     <div class="card" style="margin-top:12px"><h3>Evidence</h3>${annsFor(c.scenario_id).map(a => `<div style="font-size:13px">${a.quote ? `<i>“${esc(a.quote.slice(0, 120))}”</i> · ` : ''}${esc(a.note)}</div>`).join('') || '<span class="muted">no annotations</span>'}
       <div style="margin-top:8px"><span class="linkish" id="lab-open">open in Review view</span></div></div>
@@ -700,12 +702,28 @@ function renderLabeling() {
   $$('#labeling-page button[data-m]').forEach(b => b.onclick = () => setLabel(+b.dataset.ti, b.dataset.m, +b.dataset.l));
   $$('#labeling-page .label-row').forEach(r => r.onclick = () => { S.labelFocus = +r.dataset.ti; $$('.label-row').forEach(x => x.classList.toggle('focus', +x.dataset.ti === S.labelFocus)); });
   $('#lab-prev').onclick = () => nextConv(-1); $('#lab-next').onclick = () => nextConv(1);
+  $('#lab-confirm').onclick = () => confirmConversation();
   $('#lab-open').onclick = () => showView('review');
+}
+function isProvisional(l) { return !!l && l.source !== 'human'; }
+// Re-save every provisional pair on the current conversation as a human label (writes the
+// Langfuse score), keeping whatever value is shown, then move to the next conversation.
+async function confirmConversation() {
+  const c = S.convs[S.current]; if (!c) return; const modes = finalModes(); let n = 0, failed = 0;
+  for (const tr of c.turns) for (const m of modes) {
+    const l = labelFor(m.name, tr.trace_id); if (l && !isProvisional(l)) continue;
+    const label = l ? l.label : 0;
+    const note = annsFor(c.scenario_id).filter(a => a.trace_id === tr.trace_id && a.kind !== 'no_failure').map(a => a.note).join(' | ') || null;
+    try { const res = await api('/api/labels', {trace_id: tr.trace_id, scenario_id: c.scenario_id, mode: m.name, label, source: 'human', note}); S.labels[m.name] = (S.labels[m.name] || []).filter(r => r.trace_id !== tr.trace_id).concat([res.row]); n++; }
+    catch (e) { failed++; }
+  }
+  toast(`confirmed ${n} pair(s)${failed ? `, ${failed} failed` : ''}`); renderLabeling();
+  if (!failed) nextConv(1);
 }
 async function setLabel(ti, mode, label) {
   const c = S.convs[S.current]; const tr = c.turns[ti];
   const existing = labelFor(mode, tr.trace_id);
-  if (existing && existing.label === label) return;
+  if (existing && existing.label === label && !isProvisional(existing)) return;
   const note = annsFor(c.scenario_id).filter(a => a.trace_id === tr.trace_id && a.kind !== 'no_failure').map(a => a.note).join(' | ') || null;
   try {
     const res = await api('/api/labels', {trace_id: tr.trace_id, scenario_id: c.scenario_id, mode, label, source: 'human', note});
@@ -776,8 +794,9 @@ document.addEventListener('keydown', e => {
   } else if (S.view === 'labeling') {
     const modes = finalModes(); const c = S.convs[S.current]; if (!c) return;
     if (e.key === 'Tab') { e.preventDefault(); S.labelFocus = (S.labelFocus + 1) % c.turns.length; renderLabeling(); return; }
-    const n = parseInt(e.key, 10);
-    if (n >= 1 && n <= Math.min(modes.length, 8)) { const m = modes[n - 1].name; const tr = c.turns[S.labelFocus]; const cur = labelFor(m, tr.trace_id); setLabel(S.labelFocus, m, cur && cur.label === 1 ? 0 : 1); }
+    if (e.key === 'c') { confirmConversation(); return; }
+    const n = e.key === '0' ? 10 : parseInt(e.key, 10);
+    if (n >= 1 && n <= Math.min(modes.length, 10)) { const m = modes[n - 1].name; const tr = c.turns[S.labelFocus]; const cur = labelFor(m, tr.trace_id); setLabel(S.labelFocus, m, cur && cur.label === 1 ? 0 : 1); }
   }
 });
 

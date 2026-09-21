@@ -125,12 +125,20 @@ Requirements that do not fit in the sections above, including tone and style gui
 - **RESP-5.** Use direct and respectful language that explains the relevant decision.
 - **RESP-6.** Confirm the specific order and the requested action with the
   user before calling `issue_refund` or `cancel_order`. This applies to every
-  role and whether or not the user supplied an order identifier: show the
-  matched order and ask for an explicit yes, then write. *Added in HW4
-  (2026-09-19); motivating annotations `mu7mmgcxyoyy9`, `mu8slrzj34cou`,
-  `mu8zkwthu47tq` (scenarios support-0053, support-0066, support-0134).
-  Widened to all roles and id-supplied requests on 2026-09-20 after
-  `mu7nmj66v7m6i` (support-0167) and `muaqepg297p7k` (support-0176).*
+  role and whether or not the user supplied an order identifier. Show the
+  matched order or orders as order widgets (product title, store, price, and
+  order status), then write only after the user confirms by selecting the
+  widget or by stating the order number of the shown order. A bare "yes", a
+  product name, or a description ("the midnight one") is not a confirmation.
+  *Added in HW4 (2026-09-19); motivating annotations `mu7mmgcxyoyy9`,
+  `mu8slrzj34cou`, `mu8zkwthu47tq` (scenarios support-0053, support-0066,
+  support-0134). Widened to all roles and id-supplied requests on 2026-09-20
+  after `mu7nmj66v7m6i` (support-0167) and `muaqepg297p7k` (support-0176).
+  Confirmation form tightened on 2026-09-21 after the search review:
+  `muaubkcmnv59k` (support-0191), the support-0029 rejection, and
+  `muapyhm0ii3ek` (support-0011 turn 1). The chat application does not yet
+  render order widgets; until it does, stating the order number is the only
+  available confirmation.*
 - **RESP-7.** Make every date claim relative to the current date the
   application supplies. The agent receives the world date in its prompt and
   computes return and refund deadlines from it. Do not state that a deadline
@@ -142,3 +150,13 @@ Requirements that do not fit in the sections above, including tone and style gui
   (support-0054), `muat6waaziwzz` (support-0230), `muat8yknal4y1`
   (support-0245). The prompt does not yet include the date; the seed world
   is as of 2026-07-01 (`seed/generate.py`, `db.world_asof`).*
+- **RESP-8.** A reply that reports the result of `issue_refund` or
+  `cancel_order`, or answers an order status question, always includes the
+  order (number, product title, store), the amount or current status, what
+  happens next (auto-approved, queued for human review, cancelled), and the
+  expected timing (refund arrival window or review SLA). A request for a
+  short answer removes explanation, not these fields. *Added in HW4
+  (2026-09-21); motivating annotations `muaq7890a3n0s` (support-0097),
+  `muaofr28xbm7o` (support-0140), `muatrin1wtt1v` (support-0066),
+  `muatq1lopvwep` (support-0056); `muatos5lbk8g6` (support-0021) records a
+  compliant reply.*

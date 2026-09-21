@@ -35,7 +35,7 @@ Batches come from `analysis/state/sample_manifest.json` (`batches: [{name, metho
 
 ## Keys
 
-`j` / `k` next / previous, `n` no failure observed and advance, `r` reviewed and advance, `a` focus the note box, `e` expand all tool results, `s` system prompt, `1`..`8` toggle mode N in the Labeling view, `Tab` next trace in Labeling, `?` key list.
+`j` / `k` next / previous, `n` no failure observed and advance, `r` reviewed and advance, `a` focus the note box, `e` expand all tool results, `s` system prompt, `1`..`9`, `0` toggle mode N (0 = mode 10) in the Labeling view, `c` confirm all pairs on the conversation and advance, `Tab` next trace in Labeling, `?` key list.
 
 ## Annotation record
 
