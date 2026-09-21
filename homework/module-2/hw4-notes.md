@@ -7,5 +7,8 @@ but that wasn't what Shreya did in the lecture - it was more casual and faster -
 Can you speak to this more? How important is it to refer back to the requirements?
 And a lot of the comments weren't really in the spec, they were product ideas identified later when experiencing the app.  Speak to this again.
 
-### Comment
+### Thought
 Found that the final 15 when I focused on identifying new modes meant I wasn't just highlighting the old modes anymore. Was good to switch to "just check for new stuff"
+
+## Part D - reviewing suggestions
+Do I need to review all suggestions? Claude wants me to review all items that are flagged as possible mode matches, and some modes (write_without_confirmation) had like 30 possible matches - how do you decide how many to label? 

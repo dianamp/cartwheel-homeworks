@@ -109,9 +109,9 @@ Filled in by the human reviewer during Part D. The five per-trace suggestions ar
 
 | Suggestion | Decision (accept / revise / reject) | Reason |
 |---|---|---|
-| W1 date reasoning without a reference date | pending | |
-| W2 retrieval-caused repeats, boundary of `redundant_policy_lookup` | pending | |
-| W3 `find_order` fan-out (tool design, not a mode) | pending | |
-| W4 support-0052 as `unwarranted_escalation` positive; queued-refund-plus-ticket search | pending | |
-| W5 write without confirmation reproduces | pending | |
-| W6 inconsistent handling of the anomalous record | pending | |
+| W1 date reasoning without a reference date | accepted (all three traces, 2026-09-20) | Reviewer accepted the observations on 0054, 0230 and 0245 turn 1. Recorded as candidate mode `no_reference_date` in `patterns.json`; whether it becomes a ninth final mode or stays a SPEC revision (world date in the prompt) is still open because of the 8-mode cap. |
+| W2 retrieval-caused repeats, boundary of `redundant_policy_lookup` | rejected (2026-09-20) | Reviewer: "cw-returns was ranked first, it was just retrieved again to get the full text, which is a separate mode." Open follow-up: this reading conflicts with clause 1 of the mode's definition; to be reconciled before Part E labels for that mode. |
+| W3 `find_order` fan-out (tool design, not a mode) | no suggestion queued | Consistent with the tool-design backlog decision from axial pass 3; not used in the taxonomy. |
+| W4 support-0052 as `unwarranted_escalation` positive; queued-refund-plus-ticket search | accepted for 0052 (2026-09-20) | Added as a positive. The queued-refund-plus-ticket search was not run; noted as a Part D or HW5 candidate. |
+| W5 write without confirmation reproduces | no suggestion queued | Confirms the existing mode; the deterministic search that followed found 51 writes and no confirmed exchange. |
+| W6 inconsistent handling of the anomalous record | folded into W1 | The 0230 observation carries this; no separate suggestion. |

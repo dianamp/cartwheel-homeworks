@@ -88,7 +88,7 @@ Successful results contain `ok: true` and the result fields. Expected failures c
 
 | Tool | On success | On failure |
 | --- | --- | --- |
-| `search_help_center` | `results` containing policy identifiers, titles, snippets, and retrieval scores. | `invalid_argument` for an empty or whitespace-only query; execution exception if retrieval fails. |
+| `search_help_center` | `results` containing policy identifiers, titles, the full policy body, and retrieval scores. *Revised in HW4 (2026-09-21): snippets were truncated, so the agent re-fetched the top result with `get_policy` in the same turn (mode `redundant_policy_lookup`; motivating annotation `mubw0230rpl01`, scenario support-0230). Returning the full body makes the second call unnecessary. The running application still returns snippets until the tool is changed.* | `invalid_argument` for an empty or whitespace-only query; execution exception if retrieval fails. |
 | `get_policy` | `policy_id`, `title`, `audience`, and the full `body` of the requested policy. | `not_found` for an unknown policy identifier. |
 | `search_products` | `products` and `count`, filtered and sorted by price, then product identifier. Each product includes its identifier, store identifier, title, and price. The result limit is clamped to 1 through 25. No matches yields an empty list and count zero. | `invalid_argument` for an empty query or a nonpositive price ceiling; `not_found` for an unknown store. |
 | `get_order` | An authorized `order` record, including dates, status, store name, and refund eligibility. | `not_found` for an unknown order; `permission_denied` for an order outside the caller's scope. |
@@ -131,3 +131,14 @@ Requirements that do not fit in the sections above, including tone and style gui
   `mu8zkwthu47tq` (scenarios support-0053, support-0066, support-0134).
   Widened to all roles and id-supplied requests on 2026-09-20 after
   `mu7nmj66v7m6i` (support-0167) and `muaqepg297p7k` (support-0176).*
+- **RESP-7.** Make every date claim relative to the current date the
+  application supplies. The agent receives the world date in its prompt and
+  computes return and refund deadlines from it. Do not state that a deadline
+  has passed, or that a period the user described does not match an order,
+  unless the current date supports the claim; when a tool result such as
+  `refund_eligible` disagrees with a date inference, report the tool result
+  and the inconsistency rather than the inference. *Added in HW4
+  (2026-09-21) from Workshop review; motivating annotations `muat4ln8zme38`
+  (support-0054), `muat6waaziwzz` (support-0230), `muat8yknal4y1`
+  (support-0245). The prompt does not yet include the date; the seed world
+  is as of 2026-07-01 (`seed/generate.py`, `db.world_asof`).*
