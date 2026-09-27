@@ -23,3 +23,10 @@ __pycache__/
 .sessions.db-wal
 
 scenarios/demo_pilot_gt.json
+
+# Locally installed agent skills (npx skills add). The course's own
+# .agents/skills/agent-profiler stays tracked.
+.agents/skills/*
+!.agents/skills/agent-profiler/
+.claude/skills/
+skills-lock.json
