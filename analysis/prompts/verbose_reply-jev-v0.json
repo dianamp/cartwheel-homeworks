@@ -1,0 +1,45 @@
+{
+  "_about": "Jev (TypeSafe System One) judge for verbose_reply. Jev returns a yes probability per Noul question and no critique. One atomic Noul per Fail rule from definition v2 (hw5-progress.md), combined in code: Fail when any rule question exceeds the threshold. `verbose` is a single holistic question kept for comparison. Written from the definition and training labels only; no dev or test text.",
+  "model": "jev-1.13.0",
+  "state_fields": {
+    "earlier_conversation": "Earlier user and assistant messages, oldest first. Context only.",
+    "user_request": "The user's last message, which the final reply answers.",
+    "final_reply": "The assistant reply under evaluation."
+  },
+  "rule_questions": ["repetition", "unneeded_mechanics", "unsolicited_offer"],
+  "holistic_question": "verbose",
+  "questions": {
+    "repetition": {
+      "type": "noul",
+      "instructions": "Does `final_reply` state the same fact or instruction more than once?",
+      "criteria": {
+        "true": "The same fact, date, status, or instruction appears twice or more in `final_reply`, for example a closing summary or 'in practice' line that restates what was already said, a delivery date given in several different ways, or a rule stated together with what it is not (such as '30 days from delivery, not from purchase').",
+        "false": "Each fact and instruction in `final_reply` appears once. Listing the order number, amount, status, and timing once each is not repetition."
+      }
+    },
+    "unneeded_mechanics": {
+      "type": "noul",
+      "instructions": "Does `final_reply` include policy mechanics, caveats, exceptions, or background that `user_request` did not ask about and that do not apply to the user's situation?",
+      "criteria": {
+        "true": "`final_reply` explains how a policy works beyond what the user needs: for example it mentions store return-window overrides when no store override applies to the user, contrasts the rule with a case the user never raised, or explains internal thresholds, approval rules, or process mechanics when the user only asked for the outcome.",
+        "false": "Every policy detail in `final_reply` bears on the user's own request, such as a deadline that decides whether their request can go ahead. Also allowed: one or two sentences explaining why the request could not be done, was escalated, or was queued for review; lookup details that confirm the answer; a link to the relevant policy; and the order, amount, status, next step, and timing of a refund, cancellation, or order status answer."
+      }
+    },
+    "unsolicited_offer": {
+      "type": "noul",
+      "instructions": "Does `final_reply` offer to do a different or additional action that `user_request` did not ask for?",
+      "criteria": {
+        "true": "`final_reply` offers extra help the user did not request, for example 'Would you like me to escalate this?', 'I can also check your other orders', or 'If you want, I can open a ticket'.",
+        "false": "`final_reply` makes no such offer. Telling the user how to continue or complete the same request they asked about is not an offer. After refusing an out-of-scope request, one sentence on what the assistant can help with instead is not an offer."
+      }
+    },
+    "verbose": {
+      "type": "noul",
+      "instructions": "Does `final_reply` contain content the user did not need to answer `user_request`?",
+      "criteria": {
+        "true": "`final_reply` repeats itself, explains policy mechanics or caveats that do not apply to the user, or offers additional actions the user did not ask for.",
+        "false": "`final_reply` gives the answer, a policy citation where one is used, and at most about one sentence of relevant context. A long reply is still false when every part serves the user's request."
+      }
+    }
+  }
+}

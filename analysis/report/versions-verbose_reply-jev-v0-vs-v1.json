@@ -1,0 +1,779 @@
+{
+  "base": "v0",
+  "other": "v1",
+  "note": "All decision rules shown on dev and test; none frozen from dev first.",
+  "questions_hash": {
+    "v0": "d8eea95ca0a8",
+    "v1": "a191551717d5"
+  },
+  "dev": {
+    "Jev v0 any_rule@0.3": {
+      "tpr": 0.5714,
+      "tnr": 0.8846,
+      "tpr_interval": [
+        0.3259,
+        0.7862
+      ],
+      "tnr_interval": [
+        0.7102,
+        0.96
+      ],
+      "balanced_accuracy": 0.728,
+      "agreement": 0.775,
+      "tp": 8,
+      "fn": 6,
+      "tn": 23,
+      "fp": 3,
+      "n": 40
+    },
+    "Jev v1 any_rule@0.3": {
+      "tpr": 0.2143,
+      "tnr": 1.0,
+      "tpr_interval": [
+        0.0757,
+        0.4759
+      ],
+      "tnr_interval": [
+        0.8713,
+        1.0
+      ],
+      "balanced_accuracy": 0.6071,
+      "agreement": 0.725,
+      "tp": 3,
+      "fn": 11,
+      "tn": 26,
+      "fp": 0,
+      "n": 40
+    },
+    "Jev v0 any_rule@0.4": {
+      "tpr": 0.7143,
+      "tnr": 0.8077,
+      "tpr_interval": [
+        0.4535,
+        0.8828
+      ],
+      "tnr_interval": [
+        0.6212,
+        0.9149
+      ],
+      "balanced_accuracy": 0.761,
+      "agreement": 0.775,
+      "tp": 10,
+      "fn": 4,
+      "tn": 21,
+      "fp": 5,
+      "n": 40
+    },
+    "Jev v1 any_rule@0.4": {
+      "tpr": 0.5714,
+      "tnr": 0.9615,
+      "tpr_interval": [
+        0.3259,
+        0.7862
+      ],
+      "tnr_interval": [
+        0.8111,
+        0.9932
+      ],
+      "balanced_accuracy": 0.7665,
+      "agreement": 0.825,
+      "tp": 8,
+      "fn": 6,
+      "tn": 25,
+      "fp": 1,
+      "n": 40
+    },
+    "Jev v0 any_rule@0.5": {
+      "tpr": 0.7143,
+      "tnr": 0.8077,
+      "tpr_interval": [
+        0.4535,
+        0.8828
+      ],
+      "tnr_interval": [
+        0.6212,
+        0.9149
+      ],
+      "balanced_accuracy": 0.761,
+      "agreement": 0.775,
+      "tp": 10,
+      "fn": 4,
+      "tn": 21,
+      "fp": 5,
+      "n": 40
+    },
+    "Jev v1 any_rule@0.5": {
+      "tpr": 0.5714,
+      "tnr": 0.8846,
+      "tpr_interval": [
+        0.3259,
+        0.7862
+      ],
+      "tnr_interval": [
+        0.7102,
+        0.96
+      ],
+      "balanced_accuracy": 0.728,
+      "agreement": 0.775,
+      "tp": 8,
+      "fn": 6,
+      "tn": 23,
+      "fp": 3,
+      "n": 40
+    },
+    "Jev v0 any_rule@0.6": {
+      "tpr": 0.7857,
+      "tnr": 0.6923,
+      "tpr_interval": [
+        0.5241,
+        0.9243
+      ],
+      "tnr_interval": [
+        0.5001,
+        0.835
+      ],
+      "balanced_accuracy": 0.739,
+      "agreement": 0.725,
+      "tp": 11,
+      "fn": 3,
+      "tn": 18,
+      "fp": 8,
+      "n": 40
+    },
+    "Jev v1 any_rule@0.6": {
+      "tpr": 0.7143,
+      "tnr": 0.6923,
+      "tpr_interval": [
+        0.4535,
+        0.8828
+      ],
+      "tnr_interval": [
+        0.5001,
+        0.835
+      ],
+      "balanced_accuracy": 0.7033,
+      "agreement": 0.7,
+      "tp": 10,
+      "fn": 4,
+      "tn": 18,
+      "fp": 8,
+      "n": 40
+    },
+    "Jev v0 any_rule@0.7": {
+      "tpr": 0.9286,
+      "tnr": 0.6154,
+      "tpr_interval": [
+        0.6853,
+        0.9873
+      ],
+      "tnr_interval": [
+        0.4253,
+        0.7757
+      ],
+      "balanced_accuracy": 0.772,
+      "agreement": 0.725,
+      "tp": 13,
+      "fn": 1,
+      "tn": 16,
+      "fp": 10,
+      "n": 40
+    },
+    "Jev v1 any_rule@0.7": {
+      "tpr": 0.7857,
+      "tnr": 0.5769,
+      "tpr_interval": [
+        0.5241,
+        0.9243
+      ],
+      "tnr_interval": [
+        0.3895,
+        0.7446
+      ],
+      "balanced_accuracy": 0.6813,
+      "agreement": 0.65,
+      "tp": 11,
+      "fn": 3,
+      "tn": 15,
+      "fp": 11,
+      "n": 40
+    },
+    "Jev v0 holistic@0.3": {
+      "tpr": 0.0714,
+      "tnr": 0.9615,
+      "tpr_interval": [
+        0.0127,
+        0.3147
+      ],
+      "tnr_interval": [
+        0.8111,
+        0.9932
+      ],
+      "balanced_accuracy": 0.5165,
+      "agreement": 0.65,
+      "tp": 1,
+      "fn": 13,
+      "tn": 25,
+      "fp": 1,
+      "n": 40
+    },
+    "Jev v1 holistic@0.3": {
+      "tpr": 0.0714,
+      "tnr": 1.0,
+      "tpr_interval": [
+        0.0127,
+        0.3147
+      ],
+      "tnr_interval": [
+        0.8713,
+        1.0
+      ],
+      "balanced_accuracy": 0.5357,
+      "agreement": 0.675,
+      "tp": 1,
+      "fn": 13,
+      "tn": 26,
+      "fp": 0,
+      "n": 40
+    },
+    "Jev v0 holistic@0.4": {
+      "tpr": 0.2143,
+      "tnr": 0.9231,
+      "tpr_interval": [
+        0.0757,
+        0.4759
+      ],
+      "tnr_interval": [
+        0.7586,
+        0.9786
+      ],
+      "balanced_accuracy": 0.5687,
+      "agreement": 0.675,
+      "tp": 3,
+      "fn": 11,
+      "tn": 24,
+      "fp": 2,
+      "n": 40
+    },
+    "Jev v1 holistic@0.4": {
+      "tpr": 0.1429,
+      "tnr": 0.9615,
+      "tpr_interval": [
+        0.0401,
+        0.3994
+      ],
+      "tnr_interval": [
+        0.8111,
+        0.9932
+      ],
+      "balanced_accuracy": 0.5522,
+      "agreement": 0.675,
+      "tp": 2,
+      "fn": 12,
+      "tn": 25,
+      "fp": 1,
+      "n": 40
+    },
+    "Jev v0 holistic@0.5": {
+      "tpr": 0.4286,
+      "tnr": 0.8462,
+      "tpr_interval": [
+        0.2138,
+        0.6741
+      ],
+      "tnr_interval": [
+        0.6647,
+        0.9385
+      ],
+      "balanced_accuracy": 0.6374,
+      "agreement": 0.7,
+      "tp": 6,
+      "fn": 8,
+      "tn": 22,
+      "fp": 4,
+      "n": 40
+    },
+    "Jev v1 holistic@0.5": {
+      "tpr": 0.1429,
+      "tnr": 0.9615,
+      "tpr_interval": [
+        0.0401,
+        0.3994
+      ],
+      "tnr_interval": [
+        0.8111,
+        0.9932
+      ],
+      "balanced_accuracy": 0.5522,
+      "agreement": 0.675,
+      "tp": 2,
+      "fn": 12,
+      "tn": 25,
+      "fp": 1,
+      "n": 40
+    },
+    "Jev v0 holistic@0.6": {
+      "tpr": 0.6429,
+      "tnr": 0.7308,
+      "tpr_interval": [
+        0.3876,
+        0.8366
+      ],
+      "tnr_interval": [
+        0.5392,
+        0.863
+      ],
+      "balanced_accuracy": 0.6868,
+      "agreement": 0.7,
+      "tp": 9,
+      "fn": 5,
+      "tn": 19,
+      "fp": 7,
+      "n": 40
+    },
+    "Jev v1 holistic@0.6": {
+      "tpr": 0.2143,
+      "tnr": 0.7692,
+      "tpr_interval": [
+        0.0757,
+        0.4759
+      ],
+      "tnr_interval": [
+        0.5795,
+        0.8897
+      ],
+      "balanced_accuracy": 0.4918,
+      "agreement": 0.575,
+      "tp": 3,
+      "fn": 11,
+      "tn": 20,
+      "fp": 6,
+      "n": 40
+    },
+    "Jev v0 holistic@0.7": {
+      "tpr": 0.8571,
+      "tnr": 0.5385,
+      "tpr_interval": [
+        0.6006,
+        0.9599
+      ],
+      "tnr_interval": [
+        0.3546,
+        0.7124
+      ],
+      "balanced_accuracy": 0.6978,
+      "agreement": 0.65,
+      "tp": 12,
+      "fn": 2,
+      "tn": 14,
+      "fp": 12,
+      "n": 40
+    },
+    "Jev v1 holistic@0.7": {
+      "tpr": 0.6429,
+      "tnr": 0.4615,
+      "tpr_interval": [
+        0.3876,
+        0.8366
+      ],
+      "tnr_interval": [
+        0.2876,
+        0.6454
+      ],
+      "balanced_accuracy": 0.5522,
+      "agreement": 0.525,
+      "tp": 9,
+      "fn": 5,
+      "tn": 12,
+      "fp": 14,
+      "n": 40
+    }
+  },
+  "test": {
+    "Jev v0 any_rule@0.3": {
+      "tpr": 0.3333,
+      "tnr": 0.8947,
+      "tpr_interval": [
+        0.1719,
+        0.5463
+      ],
+      "tnr_interval": [
+        0.6861,
+        0.9706
+      ],
+      "balanced_accuracy": 0.614,
+      "agreement": 0.6,
+      "tp": 7,
+      "fn": 14,
+      "tn": 17,
+      "fp": 2,
+      "n": 40
+    },
+    "Jev v1 any_rule@0.3": {
+      "tpr": 0.1905,
+      "tnr": 1.0,
+      "tpr_interval": [
+        0.0767,
+        0.4
+      ],
+      "tnr_interval": [
+        0.8318,
+        1.0
+      ],
+      "balanced_accuracy": 0.5952,
+      "agreement": 0.575,
+      "tp": 4,
+      "fn": 17,
+      "tn": 19,
+      "fp": 0,
+      "n": 40
+    },
+    "Jev v0 any_rule@0.4": {
+      "tpr": 0.4762,
+      "tnr": 0.8947,
+      "tpr_interval": [
+        0.2834,
+        0.6763
+      ],
+      "tnr_interval": [
+        0.6861,
+        0.9706
+      ],
+      "balanced_accuracy": 0.6855,
+      "agreement": 0.675,
+      "tp": 10,
+      "fn": 11,
+      "tn": 17,
+      "fp": 2,
+      "n": 40
+    },
+    "Jev v1 any_rule@0.4": {
+      "tpr": 0.3333,
+      "tnr": 0.8947,
+      "tpr_interval": [
+        0.1719,
+        0.5463
+      ],
+      "tnr_interval": [
+        0.6861,
+        0.9706
+      ],
+      "balanced_accuracy": 0.614,
+      "agreement": 0.6,
+      "tp": 7,
+      "fn": 14,
+      "tn": 17,
+      "fp": 2,
+      "n": 40
+    },
+    "Jev v0 any_rule@0.5": {
+      "tpr": 0.5714,
+      "tnr": 0.8421,
+      "tpr_interval": [
+        0.3655,
+        0.7553
+      ],
+      "tnr_interval": [
+        0.6243,
+        0.9448
+      ],
+      "balanced_accuracy": 0.7068,
+      "agreement": 0.7,
+      "tp": 12,
+      "fn": 9,
+      "tn": 16,
+      "fp": 3,
+      "n": 40
+    },
+    "Jev v1 any_rule@0.5": {
+      "tpr": 0.4286,
+      "tnr": 0.8421,
+      "tpr_interval": [
+        0.2447,
+        0.6345
+      ],
+      "tnr_interval": [
+        0.6243,
+        0.9448
+      ],
+      "balanced_accuracy": 0.6353,
+      "agreement": 0.625,
+      "tp": 9,
+      "fn": 12,
+      "tn": 16,
+      "fp": 3,
+      "n": 40
+    },
+    "Jev v0 any_rule@0.6": {
+      "tpr": 0.7143,
+      "tnr": 0.8421,
+      "tpr_interval": [
+        0.5004,
+        0.8619
+      ],
+      "tnr_interval": [
+        0.6243,
+        0.9448
+      ],
+      "balanced_accuracy": 0.7782,
+      "agreement": 0.775,
+      "tp": 15,
+      "fn": 6,
+      "tn": 16,
+      "fp": 3,
+      "n": 40
+    },
+    "Jev v1 any_rule@0.6": {
+      "tpr": 0.5714,
+      "tnr": 0.7895,
+      "tpr_interval": [
+        0.3655,
+        0.7553
+      ],
+      "tnr_interval": [
+        0.5667,
+        0.9149
+      ],
+      "balanced_accuracy": 0.6805,
+      "agreement": 0.675,
+      "tp": 12,
+      "fn": 9,
+      "tn": 15,
+      "fp": 4,
+      "n": 40
+    },
+    "Jev v0 any_rule@0.7": {
+      "tpr": 0.7143,
+      "tnr": 0.6842,
+      "tpr_interval": [
+        0.5004,
+        0.8619
+      ],
+      "tnr_interval": [
+        0.4601,
+        0.8464
+      ],
+      "balanced_accuracy": 0.6992,
+      "agreement": 0.7,
+      "tp": 15,
+      "fn": 6,
+      "tn": 13,
+      "fp": 6,
+      "n": 40
+    },
+    "Jev v1 any_rule@0.7": {
+      "tpr": 0.7143,
+      "tnr": 0.6316,
+      "tpr_interval": [
+        0.5004,
+        0.8619
+      ],
+      "tnr_interval": [
+        0.4104,
+        0.8085
+      ],
+      "balanced_accuracy": 0.6729,
+      "agreement": 0.675,
+      "tp": 15,
+      "fn": 6,
+      "tn": 12,
+      "fp": 7,
+      "n": 40
+    },
+    "Jev v0 holistic@0.3": {
+      "tpr": 0.1429,
+      "tnr": 0.9474,
+      "tpr_interval": [
+        0.0498,
+        0.3464
+      ],
+      "tnr_interval": [
+        0.7536,
+        0.9906
+      ],
+      "balanced_accuracy": 0.5451,
+      "agreement": 0.525,
+      "tp": 3,
+      "fn": 18,
+      "tn": 18,
+      "fp": 1,
+      "n": 40
+    },
+    "Jev v1 holistic@0.3": {
+      "tpr": 0.0476,
+      "tnr": 1.0,
+      "tpr_interval": [
+        0.0085,
+        0.2267
+      ],
+      "tnr_interval": [
+        0.8318,
+        1.0
+      ],
+      "balanced_accuracy": 0.5238,
+      "agreement": 0.5,
+      "tp": 1,
+      "fn": 20,
+      "tn": 19,
+      "fp": 0,
+      "n": 40
+    },
+    "Jev v0 holistic@0.4": {
+      "tpr": 0.2857,
+      "tnr": 0.9474,
+      "tpr_interval": [
+        0.1381,
+        0.4996
+      ],
+      "tnr_interval": [
+        0.7536,
+        0.9906
+      ],
+      "balanced_accuracy": 0.6165,
+      "agreement": 0.6,
+      "tp": 6,
+      "fn": 15,
+      "tn": 18,
+      "fp": 1,
+      "n": 40
+    },
+    "Jev v1 holistic@0.4": {
+      "tpr": 0.0476,
+      "tnr": 1.0,
+      "tpr_interval": [
+        0.0085,
+        0.2267
+      ],
+      "tnr_interval": [
+        0.8318,
+        1.0
+      ],
+      "balanced_accuracy": 0.5238,
+      "agreement": 0.5,
+      "tp": 1,
+      "fn": 20,
+      "tn": 19,
+      "fp": 0,
+      "n": 40
+    },
+    "Jev v0 holistic@0.5": {
+      "tpr": 0.381,
+      "tnr": 0.8947,
+      "tpr_interval": [
+        0.2075,
+        0.5912
+      ],
+      "tnr_interval": [
+        0.6861,
+        0.9706
+      ],
+      "balanced_accuracy": 0.6378,
+      "agreement": 0.625,
+      "tp": 8,
+      "fn": 13,
+      "tn": 17,
+      "fp": 2,
+      "n": 40
+    },
+    "Jev v1 holistic@0.5": {
+      "tpr": 0.0476,
+      "tnr": 0.9474,
+      "tpr_interval": [
+        0.0085,
+        0.2267
+      ],
+      "tnr_interval": [
+        0.7536,
+        0.9906
+      ],
+      "balanced_accuracy": 0.4975,
+      "agreement": 0.475,
+      "tp": 1,
+      "fn": 20,
+      "tn": 18,
+      "fp": 1,
+      "n": 40
+    },
+    "Jev v0 holistic@0.6": {
+      "tpr": 0.5238,
+      "tnr": 0.6316,
+      "tpr_interval": [
+        0.3237,
+        0.7166
+      ],
+      "tnr_interval": [
+        0.4104,
+        0.8085
+      ],
+      "balanced_accuracy": 0.5777,
+      "agreement": 0.575,
+      "tp": 11,
+      "fn": 10,
+      "tn": 12,
+      "fp": 7,
+      "n": 40
+    },
+    "Jev v1 holistic@0.6": {
+      "tpr": 0.2857,
+      "tnr": 0.8947,
+      "tpr_interval": [
+        0.1381,
+        0.4996
+      ],
+      "tnr_interval": [
+        0.6861,
+        0.9706
+      ],
+      "balanced_accuracy": 0.5902,
+      "agreement": 0.575,
+      "tp": 6,
+      "fn": 15,
+      "tn": 17,
+      "fp": 2,
+      "n": 40
+    },
+    "Jev v0 holistic@0.7": {
+      "tpr": 0.6667,
+      "tnr": 0.4211,
+      "tpr_interval": [
+        0.4537,
+        0.8281
+      ],
+      "tnr_interval": [
+        0.2314,
+        0.6372
+      ],
+      "balanced_accuracy": 0.5439,
+      "agreement": 0.55,
+      "tp": 14,
+      "fn": 7,
+      "tn": 8,
+      "fp": 11,
+      "n": 40
+    },
+    "Jev v1 holistic@0.7": {
+      "tpr": 0.6667,
+      "tnr": 0.5263,
+      "tpr_interval": [
+        0.4537,
+        0.8281
+      ],
+      "tnr_interval": [
+        0.3171,
+        0.7267
+      ],
+      "balanced_accuracy": 0.5965,
+      "agreement": 0.6,
+      "tp": 14,
+      "fn": 7,
+      "tn": 10,
+      "fp": 9,
+      "n": 40
+    }
+  },
+  "mean_yes_probability_shift": {
+    "repetition": -0.0006,
+    "unneeded_mechanics": 0.087,
+    "unsolicited_offer": 0.0875,
+    "verbose": 0.0682
+  }
+}

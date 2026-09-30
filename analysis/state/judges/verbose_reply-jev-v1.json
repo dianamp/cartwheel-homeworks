@@ -1,0 +1,1310 @@
+{
+  "judge_id": "verbose_reply-jev-v1",
+  "model": "jev-1.13.0",
+  "questions_file": "analysis/prompts/verbose_reply-jev-v1.json",
+  "questions_hash": "a191551717d5",
+  "status": "draft",
+  "decision": null,
+  "answers": {
+    "173c7634991214ea6016d17d3a3fa865": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.29,
+        "unneeded_mechanics": 0.5,
+        "unsolicited_offer": 0.55,
+        "verbose": 0.6
+      },
+      "usage": {
+        "input_tokens": 925,
+        "output_tokens": 79
+      }
+    },
+    "286855650ab4bac13a20394023c19cb5": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.91,
+        "unneeded_mechanics": 0.1,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.49
+      },
+      "usage": {
+        "input_tokens": 716,
+        "output_tokens": 79
+      }
+    },
+    "3a50b2ad0f5ab100dd094d375b3d41b6": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.95,
+        "unneeded_mechanics": 0.51,
+        "unsolicited_offer": 0.06,
+        "verbose": 0.84
+      },
+      "usage": {
+        "input_tokens": 885,
+        "output_tokens": 79
+      }
+    },
+    "3ab3db94f9fbd20c5b0c22197a9a42de": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.77,
+        "unneeded_mechanics": 0.49,
+        "unsolicited_offer": 0.6,
+        "verbose": 0.65
+      },
+      "usage": {
+        "input_tokens": 1427,
+        "output_tokens": 79
+      }
+    },
+    "3ff2729da5b3d80a9de9ee1945a41057": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.06,
+        "unneeded_mechanics": 0.12,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.53
+      },
+      "usage": {
+        "input_tokens": 630,
+        "output_tokens": 79
+      }
+    },
+    "4c81b37b334a1935ccd51ddd43f7c017": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.32,
+        "unneeded_mechanics": 0.6,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.79
+      },
+      "usage": {
+        "input_tokens": 752,
+        "output_tokens": 79
+      }
+    },
+    "4e30bf240e5c8d570799ff61a60c8a15": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.75,
+        "unneeded_mechanics": 0.5,
+        "unsolicited_offer": 0.22,
+        "verbose": 0.73
+      },
+      "usage": {
+        "input_tokens": 844,
+        "output_tokens": 79
+      }
+    },
+    "51171155d947caeb0b3797a848e3a529": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.85,
+        "unneeded_mechanics": 0.57,
+        "unsolicited_offer": 0.96,
+        "verbose": 0.71
+      },
+      "usage": {
+        "input_tokens": 821,
+        "output_tokens": 79
+      }
+    },
+    "6afdc8abc9a9bde0160f1bef8b0413d1": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.42,
+        "unneeded_mechanics": 0.04,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.65
+      },
+      "usage": {
+        "input_tokens": 764,
+        "output_tokens": 79
+      }
+    },
+    "72c22852c63a4347dad88c260ddc54cd": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.29,
+        "unneeded_mechanics": 0.53,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.88
+      },
+      "usage": {
+        "input_tokens": 712,
+        "output_tokens": 79
+      }
+    },
+    "73a47cfaf95115f78c5858a478a9560f": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.27,
+        "unneeded_mechanics": 0.54,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.63
+      },
+      "usage": {
+        "input_tokens": 708,
+        "output_tokens": 79
+      }
+    },
+    "75e94a7296cff8edc447060132ea8d09": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.46,
+        "unneeded_mechanics": 0.11,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.6
+      },
+      "usage": {
+        "input_tokens": 703,
+        "output_tokens": 79
+      }
+    },
+    "8acb0e73d7f8f64161ec44620d567d62": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.33,
+        "unneeded_mechanics": 0.18,
+        "unsolicited_offer": 0.58,
+        "verbose": 0.78
+      },
+      "usage": {
+        "input_tokens": 690,
+        "output_tokens": 79
+      }
+    },
+    "a92060ed0ad9b9a5a153163471f7deb7": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.16,
+        "unneeded_mechanics": 0.21,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.8
+      },
+      "usage": {
+        "input_tokens": 622,
+        "output_tokens": 79
+      }
+    },
+    "aec73e9746f1386f167fe1fc24af0e3f": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.91,
+        "unneeded_mechanics": 0.55,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.71
+      },
+      "usage": {
+        "input_tokens": 789,
+        "output_tokens": 79
+      }
+    },
+    "b69c6ff17c92f3fc74ce7658c0727e25": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.4,
+        "unneeded_mechanics": 0.27,
+        "unsolicited_offer": 0.98,
+        "verbose": 0.92
+      },
+      "usage": {
+        "input_tokens": 686,
+        "output_tokens": 79
+      }
+    },
+    "d8169bd01d0b78672c986bd74a59fb46": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.33,
+        "unneeded_mechanics": 0.23,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.56
+      },
+      "usage": {
+        "input_tokens": 681,
+        "output_tokens": 79
+      }
+    },
+    "dabe65f6482e93bce5a1c2f2847f5374": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.93,
+        "unneeded_mechanics": 0.15,
+        "unsolicited_offer": 0.06,
+        "verbose": 0.87
+      },
+      "usage": {
+        "input_tokens": 710,
+        "output_tokens": 79
+      }
+    },
+    "de8abc2e3e7681dfa47f847be0c58cd4": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.07,
+        "unneeded_mechanics": 0.34,
+        "unsolicited_offer": 0.64,
+        "verbose": 0.57
+      },
+      "usage": {
+        "input_tokens": 656,
+        "output_tokens": 79
+      }
+    },
+    "f241cce1c5036e643899d4dbc5cadcc4": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.74,
+        "unneeded_mechanics": 0.32,
+        "unsolicited_offer": 0.55,
+        "verbose": 0.81
+      },
+      "usage": {
+        "input_tokens": 779,
+        "output_tokens": 79
+      }
+    },
+    "019bc026ff85fbf1663025c248b241b0": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.84,
+        "unneeded_mechanics": 0.27,
+        "unsolicited_offer": 0.87,
+        "verbose": 0.54
+      },
+      "usage": {
+        "input_tokens": 735,
+        "output_tokens": 79
+      }
+    },
+    "04314ac3d3fc06b14cae105c8aa17d2a": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.29,
+        "unneeded_mechanics": 0.82,
+        "unsolicited_offer": 0.9,
+        "verbose": 0.85
+      },
+      "usage": {
+        "input_tokens": 936,
+        "output_tokens": 79
+      }
+    },
+    "168a15f8b84afda8f86b4a50f1b84eed": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.37,
+        "unneeded_mechanics": 0.17,
+        "unsolicited_offer": 0.36,
+        "verbose": 0.34
+      },
+      "usage": {
+        "input_tokens": 723,
+        "output_tokens": 79
+      }
+    },
+    "1b8fec97e5b3f21c7180f8ee900a3695": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.08,
+        "unneeded_mechanics": 0.81,
+        "unsolicited_offer": 0.08,
+        "verbose": 0.92
+      },
+      "usage": {
+        "input_tokens": 663,
+        "output_tokens": 79
+      }
+    },
+    "23a9eb1fee7a0c5015b719476455b59a": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.05,
+        "unneeded_mechanics": 0.26,
+        "unsolicited_offer": 0.05,
+        "verbose": 0.7
+      },
+      "usage": {
+        "input_tokens": 655,
+        "output_tokens": 79
+      }
+    },
+    "283e5e53dc518598a6dfedd6c9700364": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.66,
+        "unneeded_mechanics": 0.06,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.65
+      },
+      "usage": {
+        "input_tokens": 1000,
+        "output_tokens": 79
+      }
+    },
+    "2ef8a2a1c8e8e40b12af387014c5a0af": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.73,
+        "unneeded_mechanics": 0.36,
+        "unsolicited_offer": 0.6,
+        "verbose": 0.75
+      },
+      "usage": {
+        "input_tokens": 779,
+        "output_tokens": 79
+      }
+    },
+    "37c8aa38ce99878aeba5f74634b28eed": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.86,
+        "unneeded_mechanics": 0.4,
+        "unsolicited_offer": 0.36,
+        "verbose": 0.63
+      },
+      "usage": {
+        "input_tokens": 1356,
+        "output_tokens": 79
+      }
+    },
+    "389ac9eb16d6ad5bd5fb5c28710231fd": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.03,
+        "unneeded_mechanics": 0.02,
+        "unsolicited_offer": 0.02,
+        "verbose": 0.1
+      },
+      "usage": {
+        "input_tokens": 618,
+        "output_tokens": 79
+      }
+    },
+    "3ca881a3a021c7e131b8e4e80cdf5998": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.89,
+        "unneeded_mechanics": 0.67,
+        "unsolicited_offer": 0.82,
+        "verbose": 0.57
+      },
+      "usage": {
+        "input_tokens": 953,
+        "output_tokens": 79
+      }
+    },
+    "5409b3cfa7c03957cccebf4361316979": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.09,
+        "unneeded_mechanics": 0.51,
+        "unsolicited_offer": 0.94,
+        "verbose": 0.74
+      },
+      "usage": {
+        "input_tokens": 670,
+        "output_tokens": 79
+      }
+    },
+    "5679b45d6e47d3900d2653280d6f878d": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.74,
+        "unneeded_mechanics": 0.52,
+        "unsolicited_offer": 0.89,
+        "verbose": 0.7
+      },
+      "usage": {
+        "input_tokens": 848,
+        "output_tokens": 79
+      }
+    },
+    "5d6e74bd0f2c3712ef553e1b3e6a348d": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.19,
+        "unneeded_mechanics": 0.47,
+        "unsolicited_offer": 0.07,
+        "verbose": 0.66
+      },
+      "usage": {
+        "input_tokens": 999,
+        "output_tokens": 79
+      }
+    },
+    "61bc4731a02edf2386259eabdef1747f": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.13,
+        "unneeded_mechanics": 0.31,
+        "unsolicited_offer": 0.22,
+        "verbose": 0.6
+      },
+      "usage": {
+        "input_tokens": 658,
+        "output_tokens": 79
+      }
+    },
+    "6342d3a0b67f74b505956dcfc58c4f75": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.93,
+        "unneeded_mechanics": 0.59,
+        "unsolicited_offer": 0.07,
+        "verbose": 0.79
+      },
+      "usage": {
+        "input_tokens": 944,
+        "output_tokens": 79
+      }
+    },
+    "682678d4f391ccee11e351119321f4e2": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.57,
+        "unneeded_mechanics": 0.59,
+        "unsolicited_offer": 0.23,
+        "verbose": 0.74
+      },
+      "usage": {
+        "input_tokens": 863,
+        "output_tokens": 79
+      }
+    },
+    "6e1176c923472c7dfd512ef36097b020": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.12,
+        "unneeded_mechanics": 0.19,
+        "unsolicited_offer": 0.82,
+        "verbose": 0.71
+      },
+      "usage": {
+        "input_tokens": 738,
+        "output_tokens": 79
+      }
+    },
+    "7c87c38a7bdc1f30c83906cb105d5140": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.51,
+        "unneeded_mechanics": 0.68,
+        "unsolicited_offer": 0.89,
+        "verbose": 0.75
+      },
+      "usage": {
+        "input_tokens": 830,
+        "output_tokens": 79
+      }
+    },
+    "82892f7bbc217c02ce51cfafa4de058f": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.55,
+        "unneeded_mechanics": 0.52,
+        "unsolicited_offer": 0.46,
+        "verbose": 0.62
+      },
+      "usage": {
+        "input_tokens": 797,
+        "output_tokens": 79
+      }
+    },
+    "891be4deb9dc6edd8ba871ee3d54500a": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.55,
+        "unneeded_mechanics": 0.21,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.66
+      },
+      "usage": {
+        "input_tokens": 649,
+        "output_tokens": 79
+      }
+    },
+    "8d5c01b47a868c879b66e72f7acfdaa1": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.22,
+        "unneeded_mechanics": 0.57,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.89
+      },
+      "usage": {
+        "input_tokens": 715,
+        "output_tokens": 79
+      }
+    },
+    "8d9b7ca383decc606861ae9405a7b3c3": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.29,
+        "unneeded_mechanics": 0.27,
+        "unsolicited_offer": 0.44,
+        "verbose": 0.55
+      },
+      "usage": {
+        "input_tokens": 727,
+        "output_tokens": 79
+      }
+    },
+    "90e99ad5eb496f2e1ca2d8d952c25dc0": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.56,
+        "unneeded_mechanics": 0.25,
+        "unsolicited_offer": 0.06,
+        "verbose": 0.78
+      },
+      "usage": {
+        "input_tokens": 732,
+        "output_tokens": 79
+      }
+    },
+    "92b0e2ed929edd7671202a6974559541": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.92,
+        "unneeded_mechanics": 0.38,
+        "unsolicited_offer": 0.07,
+        "verbose": 0.83
+      },
+      "usage": {
+        "input_tokens": 719,
+        "output_tokens": 79
+      }
+    },
+    "985896bc93ebb76b863326ab874ee8c7": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.69,
+        "unneeded_mechanics": 0.49,
+        "unsolicited_offer": 0.07,
+        "verbose": 0.73
+      },
+      "usage": {
+        "input_tokens": 1299,
+        "output_tokens": 79
+      }
+    },
+    "9866e2d06822061c27b69381595caef3": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.06,
+        "unneeded_mechanics": 0.22,
+        "unsolicited_offer": 0.32,
+        "verbose": 0.71
+      },
+      "usage": {
+        "input_tokens": 640,
+        "output_tokens": 79
+      }
+    },
+    "b0dfb8375799e4889ae99afdec9d1beb": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.83,
+        "unneeded_mechanics": 0.6,
+        "unsolicited_offer": 0.61,
+        "verbose": 0.81
+      },
+      "usage": {
+        "input_tokens": 812,
+        "output_tokens": 79
+      }
+    },
+    "b437803d98806f0766484854007212f2": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.52,
+        "unneeded_mechanics": 0.33,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.69
+      },
+      "usage": {
+        "input_tokens": 1004,
+        "output_tokens": 79
+      }
+    },
+    "bbcb26c2f1c272cfcc84223cf45f73ff": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.49,
+        "unneeded_mechanics": 0.6,
+        "unsolicited_offer": 0.66,
+        "verbose": 0.69
+      },
+      "usage": {
+        "input_tokens": 880,
+        "output_tokens": 79
+      }
+    },
+    "bd7424e5441eb7bc2ef9333eb82f83e0": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.68,
+        "unneeded_mechanics": 0.51,
+        "unsolicited_offer": 0.83,
+        "verbose": 0.69
+      },
+      "usage": {
+        "input_tokens": 864,
+        "output_tokens": 79
+      }
+    },
+    "c8028783f8a9ef8b275855fa5e1125c9": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.26,
+        "unneeded_mechanics": 0.31,
+        "unsolicited_offer": 0.53,
+        "verbose": 0.4
+      },
+      "usage": {
+        "input_tokens": 668,
+        "output_tokens": 79
+      }
+    },
+    "d02b5b8c9813b199e6512d5dea2ce8f4": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.76,
+        "unneeded_mechanics": 0.57,
+        "unsolicited_offer": 0.95,
+        "verbose": 0.53
+      },
+      "usage": {
+        "input_tokens": 844,
+        "output_tokens": 79
+      }
+    },
+    "e7cec92d6e2a72b0e19b082a972b5e8e": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.51,
+        "unneeded_mechanics": 0.71,
+        "unsolicited_offer": 0.73,
+        "verbose": 0.96
+      },
+      "usage": {
+        "input_tokens": 645,
+        "output_tokens": 79
+      }
+    },
+    "e8b29aebeba277d2188c44b7b06fa857": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.19,
+        "unneeded_mechanics": 0.37,
+        "unsolicited_offer": 0.05,
+        "verbose": 0.68
+      },
+      "usage": {
+        "input_tokens": 684,
+        "output_tokens": 79
+      }
+    },
+    "f1dfad5e6c236ee85a99e7ff9c79fff9": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.16,
+        "unneeded_mechanics": 0.18,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.62
+      },
+      "usage": {
+        "input_tokens": 699,
+        "output_tokens": 79
+      }
+    },
+    "f2d254cb404b7581fc46e2de40d8b8d9": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.06,
+        "unneeded_mechanics": 0.33,
+        "unsolicited_offer": 0.06,
+        "verbose": 0.79
+      },
+      "usage": {
+        "input_tokens": 653,
+        "output_tokens": 79
+      }
+    },
+    "f3dd0cc0250e005e551762780c888874": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.87,
+        "unneeded_mechanics": 0.54,
+        "unsolicited_offer": 0.88,
+        "verbose": 0.62
+      },
+      "usage": {
+        "input_tokens": 1038,
+        "output_tokens": 79
+      }
+    },
+    "f605f22e4372b9d0ec4cdc4bf4afb23b": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.87,
+        "unneeded_mechanics": 0.48,
+        "unsolicited_offer": 0.88,
+        "verbose": 0.52
+      },
+      "usage": {
+        "input_tokens": 842,
+        "output_tokens": 79
+      }
+    },
+    "fa015c4d50cc0ef5aedd2358b3704a6b": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.07,
+        "unneeded_mechanics": 0.62,
+        "unsolicited_offer": 0.06,
+        "verbose": 0.88
+      },
+      "usage": {
+        "input_tokens": 640,
+        "output_tokens": 79
+      }
+    },
+    "fc8d189e31fd5f5951a11f951fd17142": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.07,
+        "unneeded_mechanics": 0.39,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.67
+      },
+      "usage": {
+        "input_tokens": 623,
+        "output_tokens": 79
+      }
+    },
+    "0882d44696b71af0c20abb7decb3de68": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.83,
+        "unneeded_mechanics": 0.4,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.63
+      },
+      "usage": {
+        "input_tokens": 765,
+        "output_tokens": 79
+      }
+    },
+    "1be27ffb6218b5096ef6cb5023dc23c8": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.49,
+        "unneeded_mechanics": 0.57,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.66
+      },
+      "usage": {
+        "input_tokens": 732,
+        "output_tokens": 79
+      }
+    },
+    "1c303c23853df10222595fe6ecd94979": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.73,
+        "unneeded_mechanics": 0.58,
+        "unsolicited_offer": 0.9,
+        "verbose": 0.67
+      },
+      "usage": {
+        "input_tokens": 865,
+        "output_tokens": 79
+      }
+    },
+    "1d64910a303986a1ecc4e7f95fb341aa": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.75,
+        "unneeded_mechanics": 0.64,
+        "unsolicited_offer": 0.92,
+        "verbose": 0.72
+      },
+      "usage": {
+        "input_tokens": 776,
+        "output_tokens": 79
+      }
+    },
+    "20a17db1c717dc4499b614fb9aa629c0": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.91,
+        "unneeded_mechanics": 0.62,
+        "unsolicited_offer": 0.08,
+        "verbose": 0.72
+      },
+      "usage": {
+        "input_tokens": 803,
+        "output_tokens": 79
+      }
+    },
+    "20cfb34964e90b24a7ffca0dd827aa5c": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.9,
+        "unneeded_mechanics": 0.05,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.79
+      },
+      "usage": {
+        "input_tokens": 856,
+        "output_tokens": 79
+      }
+    },
+    "214a9664bbe02ff28addbc7a31c7b36b": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.11,
+        "unneeded_mechanics": 0.09,
+        "unsolicited_offer": 0.68,
+        "verbose": 0.62
+      },
+      "usage": {
+        "input_tokens": 711,
+        "output_tokens": 79
+      }
+    },
+    "26be5d0ecf9ef929076758825f818a1d": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.47,
+        "unneeded_mechanics": 0.27,
+        "unsolicited_offer": 0.59,
+        "verbose": 0.68
+      },
+      "usage": {
+        "input_tokens": 687,
+        "output_tokens": 79
+      }
+    },
+    "281b031bad676fb84b647bfd8a96169d": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.5,
+        "unneeded_mechanics": 0.66,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.8
+      },
+      "usage": {
+        "input_tokens": 739,
+        "output_tokens": 79
+      }
+    },
+    "39ea9fe80e643bd559810cbdbb43a6a3": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.19,
+        "unneeded_mechanics": 0.5,
+        "unsolicited_offer": 0.08,
+        "verbose": 0.74
+      },
+      "usage": {
+        "input_tokens": 758,
+        "output_tokens": 79
+      }
+    },
+    "3ea0b3e13ac5d04540b99b32ab7899c1": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.35,
+        "unneeded_mechanics": 0.06,
+        "unsolicited_offer": 0.05,
+        "verbose": 0.78
+      },
+      "usage": {
+        "input_tokens": 728,
+        "output_tokens": 79
+      }
+    },
+    "40d0f6aacf480458663c499339224483": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.12,
+        "unneeded_mechanics": 0.51,
+        "unsolicited_offer": 0.08,
+        "verbose": 0.86
+      },
+      "usage": {
+        "input_tokens": 631,
+        "output_tokens": 79
+      }
+    },
+    "4b4432d8386450d8ebbb7c1e24fda011": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.75,
+        "unneeded_mechanics": 0.34,
+        "unsolicited_offer": 0.93,
+        "verbose": 0.5
+      },
+      "usage": {
+        "input_tokens": 771,
+        "output_tokens": 79
+      }
+    },
+    "5720eab03782edf4c38e8a3242f4f582": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.37,
+        "unneeded_mechanics": 0.06,
+        "unsolicited_offer": 0.02,
+        "verbose": 0.78
+      },
+      "usage": {
+        "input_tokens": 631,
+        "output_tokens": 79
+      }
+    },
+    "67ca5956e4cfc57aa0cdc669cfab234a": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.84,
+        "unneeded_mechanics": 0.54,
+        "unsolicited_offer": 0.91,
+        "verbose": 0.61
+      },
+      "usage": {
+        "input_tokens": 829,
+        "output_tokens": 79
+      }
+    },
+    "7117832e7d57b89b4bb95c7c60ff52d9": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.44,
+        "unneeded_mechanics": 0.19,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.57
+      },
+      "usage": {
+        "input_tokens": 631,
+        "output_tokens": 79
+      }
+    },
+    "71dd82e225587efb0b96091501b7f9f0": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.41,
+        "unneeded_mechanics": 0.44,
+        "unsolicited_offer": 0.67,
+        "verbose": 0.55
+      },
+      "usage": {
+        "input_tokens": 813,
+        "output_tokens": 79
+      }
+    },
+    "7c5ce7600c15a075e4ecc586d498785e": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.42,
+        "unneeded_mechanics": 0.61,
+        "unsolicited_offer": 0.87,
+        "verbose": 0.73
+      },
+      "usage": {
+        "input_tokens": 773,
+        "output_tokens": 79
+      }
+    },
+    "7d39703c00359e1ece85dd29d1fb02b7": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.05,
+        "unneeded_mechanics": 0.11,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.55
+      },
+      "usage": {
+        "input_tokens": 627,
+        "output_tokens": 79
+      }
+    },
+    "7d643bcbcfcfee52a1a34620a8f403ef": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.79,
+        "unneeded_mechanics": 0.43,
+        "unsolicited_offer": 0.73,
+        "verbose": 0.61
+      },
+      "usage": {
+        "input_tokens": 1454,
+        "output_tokens": 79
+      }
+    },
+    "8a4b8393c3fc0c2ea633bfe6577cb462": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.36,
+        "unneeded_mechanics": 0.67,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.75
+      },
+      "usage": {
+        "input_tokens": 722,
+        "output_tokens": 79
+      }
+    },
+    "95236a75300dcabe92b5b881cce01a41": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.75,
+        "unneeded_mechanics": 0.56,
+        "unsolicited_offer": 0.95,
+        "verbose": 0.69
+      },
+      "usage": {
+        "input_tokens": 805,
+        "output_tokens": 79
+      }
+    },
+    "98d84c1c4e7a4cabe568cc81636cf4f1": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.89,
+        "unneeded_mechanics": 0.56,
+        "unsolicited_offer": 0.85,
+        "verbose": 0.87
+      },
+      "usage": {
+        "input_tokens": 1178,
+        "output_tokens": 79
+      }
+    },
+    "9bf584cc287fefdf7e0695d722782d01": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.74,
+        "unneeded_mechanics": 0.41,
+        "unsolicited_offer": 0.58,
+        "verbose": 0.55
+      },
+      "usage": {
+        "input_tokens": 857,
+        "output_tokens": 79
+      }
+    },
+    "9c550c45be48d652083d481879f65520": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.87,
+        "unneeded_mechanics": 0.07,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.51
+      },
+      "usage": {
+        "input_tokens": 929,
+        "output_tokens": 79
+      }
+    },
+    "9f364d7dd24fe1ee44a91039aefa4c18": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.33,
+        "unneeded_mechanics": 0.12,
+        "unsolicited_offer": 0.06,
+        "verbose": 0.61
+      },
+      "usage": {
+        "input_tokens": 3812,
+        "output_tokens": 79
+      }
+    },
+    "af83dfdaaa89b9bfd51d75b9b0f8c8d2": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.56,
+        "unneeded_mechanics": 0.06,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.66
+      },
+      "usage": {
+        "input_tokens": 692,
+        "output_tokens": 79
+      }
+    },
+    "b6cf93a3d5198d44b87aea2b6cc34be2": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.32,
+        "unneeded_mechanics": 0.17,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.84
+      },
+      "usage": {
+        "input_tokens": 699,
+        "output_tokens": 79
+      }
+    },
+    "b6e6c26d8e41cd5a3900565e6500c6cd": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.9,
+        "unneeded_mechanics": 0.53,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.75
+      },
+      "usage": {
+        "input_tokens": 738,
+        "output_tokens": 79
+      }
+    },
+    "b91b19c5af698bb46951dc512135371e": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.65,
+        "unneeded_mechanics": 0.2,
+        "unsolicited_offer": 0.05,
+        "verbose": 0.7
+      },
+      "usage": {
+        "input_tokens": 835,
+        "output_tokens": 79
+      }
+    },
+    "be629428cc3b148066befa3fcda0967f": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.56,
+        "unneeded_mechanics": 0.43,
+        "unsolicited_offer": 0.85,
+        "verbose": 0.7
+      },
+      "usage": {
+        "input_tokens": 864,
+        "output_tokens": 79
+      }
+    },
+    "c7c6dfc2258d37d9e29f607f76399dc6": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.05,
+        "unneeded_mechanics": 0.02,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.12
+      },
+      "usage": {
+        "input_tokens": 627,
+        "output_tokens": 79
+      }
+    },
+    "c89578e38c4b96f863924e674a641410": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.31,
+        "unneeded_mechanics": 0.38,
+        "unsolicited_offer": 0.08,
+        "verbose": 0.65
+      },
+      "usage": {
+        "input_tokens": 1014,
+        "output_tokens": 79
+      }
+    },
+    "caab0dca46524e2ed44bd7364846a7d1": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.68,
+        "unneeded_mechanics": 0.65,
+        "unsolicited_offer": 0.05,
+        "verbose": 0.79
+      },
+      "usage": {
+        "input_tokens": 778,
+        "output_tokens": 79
+      }
+    },
+    "ccb9ac73056c94dcb5bb2b7149a3652b": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.87,
+        "unneeded_mechanics": 0.53,
+        "unsolicited_offer": 0.54,
+        "verbose": 0.71
+      },
+      "usage": {
+        "input_tokens": 842,
+        "output_tokens": 79
+      }
+    },
+    "d2c00ee7f6ceaba26dfc3927accf68b0": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.93,
+        "unneeded_mechanics": 0.08,
+        "unsolicited_offer": 0.05,
+        "verbose": 0.84
+      },
+      "usage": {
+        "input_tokens": 721,
+        "output_tokens": 79
+      }
+    },
+    "e197344ac6c0e5f811a4f3492c2b0239": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.28,
+        "unneeded_mechanics": 0.26,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.56
+      },
+      "usage": {
+        "input_tokens": 697,
+        "output_tokens": 79
+      }
+    },
+    "ee63b464493a6669fb23da2b87c199ed": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.42,
+        "unneeded_mechanics": 0.08,
+        "unsolicited_offer": 0.04,
+        "verbose": 0.63
+      },
+      "usage": {
+        "input_tokens": 1928,
+        "output_tokens": 79
+      }
+    },
+    "f47303d80a62b6ffdaccc490ebe77db8": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.77,
+        "unneeded_mechanics": 0.5,
+        "unsolicited_offer": 0.94,
+        "verbose": 0.73
+      },
+      "usage": {
+        "input_tokens": 786,
+        "output_tokens": 79
+      }
+    },
+    "ffe3857a020e5c55ea953479e7157963": {
+      "model": "jev-1.13.0",
+      "nouls": {
+        "repetition": 0.09,
+        "unneeded_mechanics": 0.06,
+        "unsolicited_offer": 0.03,
+        "verbose": 0.67
+      },
+      "usage": {
+        "input_tokens": 678,
+        "output_tokens": 79
+      }
+    }
+  }
+}
