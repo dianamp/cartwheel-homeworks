@@ -1,0 +1,84 @@
+{
+  "model": "gpt-5-mini",
+  "prompt": "verbose_reply-v0 (frozen)",
+  "dev": {
+    "gpt-4o-mini": {
+      "tpr": 0.5,
+      "tnr": 1.0,
+      "tpr_interval": [
+        0.268,
+        0.732
+      ],
+      "tnr_interval": [
+        0.8713,
+        1.0
+      ],
+      "balanced_accuracy": 0.75,
+      "agreement": 0.825,
+      "tp": 7,
+      "fn": 7,
+      "tn": 26,
+      "fp": 0,
+      "n": 40
+    },
+    "gpt-5-mini": {
+      "tpr": 0.8571,
+      "tnr": 0.5769,
+      "tpr_interval": [
+        0.6006,
+        0.9599
+      ],
+      "tnr_interval": [
+        0.3895,
+        0.7446
+      ],
+      "balanced_accuracy": 0.717,
+      "agreement": 0.675,
+      "tp": 12,
+      "fn": 2,
+      "tn": 15,
+      "fp": 11,
+      "n": 40
+    }
+  },
+  "test": {
+    "gpt-4o-mini": {
+      "tpr": 0.1905,
+      "tnr": 0.8947,
+      "tpr_interval": [
+        0.0767,
+        0.4
+      ],
+      "tnr_interval": [
+        0.6861,
+        0.9706
+      ],
+      "balanced_accuracy": 0.5426,
+      "agreement": 0.525,
+      "tp": 4,
+      "fn": 17,
+      "tn": 17,
+      "fp": 2,
+      "n": 40
+    },
+    "gpt-5-mini": {
+      "tpr": 0.7619,
+      "tnr": 0.6842,
+      "tpr_interval": [
+        0.5491,
+        0.8937
+      ],
+      "tnr_interval": [
+        0.4601,
+        0.8464
+      ],
+      "balanced_accuracy": 0.7231,
+      "agreement": 0.725,
+      "tp": 16,
+      "fn": 5,
+      "tn": 13,
+      "fp": 6,
+      "n": 40
+    }
+  }
+}

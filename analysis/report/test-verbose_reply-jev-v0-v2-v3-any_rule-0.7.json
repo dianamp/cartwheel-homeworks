@@ -1,0 +1,63 @@
+{
+  "split": "test",
+  "rule": "any_rule",
+  "threshold": 0.7,
+  "note": "No version was frozen from dev first.",
+  "v0": {
+    "tpr": 0.7143,
+    "tnr": 0.6842,
+    "tpr_interval": [
+      0.5004,
+      0.8619
+    ],
+    "tnr_interval": [
+      0.4601,
+      0.8464
+    ],
+    "balanced_accuracy": 0.6992,
+    "agreement": 0.7,
+    "tp": 15,
+    "fn": 6,
+    "tn": 13,
+    "fp": 6,
+    "n": 40
+  },
+  "v2": {
+    "tpr": 0.6667,
+    "tnr": 0.5789,
+    "tpr_interval": [
+      0.4537,
+      0.8281
+    ],
+    "tnr_interval": [
+      0.3628,
+      0.7686
+    ],
+    "balanced_accuracy": 0.6228,
+    "agreement": 0.625,
+    "tp": 14,
+    "fn": 7,
+    "tn": 11,
+    "fp": 8,
+    "n": 40
+  },
+  "v3": {
+    "tpr": 0.7143,
+    "tnr": 0.5789,
+    "tpr_interval": [
+      0.5004,
+      0.8619
+    ],
+    "tnr_interval": [
+      0.3628,
+      0.7686
+    ],
+    "balanced_accuracy": 0.6466,
+    "agreement": 0.65,
+    "tp": 15,
+    "fn": 6,
+    "tn": 11,
+    "fp": 8,
+    "n": 40
+  }
+}

@@ -1,0 +1,358 @@
+{
+  "split": "test",
+  "class_counts": {
+    "pass": 21,
+    "fail": 19
+  },
+  "note": "Jev rows are all decision rules on test; none was frozen from dev first.",
+  "judges": {
+    "gpt-4o-mini, v0 prompt (frozen)": {
+      "tpr": 0.1905,
+      "tnr": 0.8947,
+      "tpr_interval": [
+        0.0767,
+        0.4
+      ],
+      "tnr_interval": [
+        0.6861,
+        0.9706
+      ],
+      "balanced_accuracy": 0.5426,
+      "agreement": 0.525,
+      "tp": 4,
+      "fn": 17,
+      "tn": 17,
+      "fp": 2,
+      "n": 40,
+      "verbose_recall": 0.8947,
+      "verbose_recall_interval": [
+        0.6861,
+        0.9706
+      ],
+      "verbose_precision": 0.5,
+      "verbose_precision_interval": [
+        0.3407,
+        0.6593
+      ]
+    },
+    "gpt-5-mini, v0 prompt": {
+      "tpr": 0.7619,
+      "tnr": 0.6842,
+      "tpr_interval": [
+        0.5491,
+        0.8937
+      ],
+      "tnr_interval": [
+        0.4601,
+        0.8464
+      ],
+      "balanced_accuracy": 0.7231,
+      "agreement": 0.725,
+      "tp": 16,
+      "fn": 5,
+      "tn": 13,
+      "fp": 6,
+      "n": 40,
+      "verbose_recall": 0.6842,
+      "verbose_recall_interval": [
+        0.4601,
+        0.8464
+      ],
+      "verbose_precision": 0.7222,
+      "verbose_precision_interval": [
+        0.4913,
+        0.875
+      ]
+    },
+    "Jev any_rule @ 0.3": {
+      "tpr": 0.3333,
+      "tnr": 0.8947,
+      "tpr_interval": [
+        0.1719,
+        0.5463
+      ],
+      "tnr_interval": [
+        0.6861,
+        0.9706
+      ],
+      "balanced_accuracy": 0.614,
+      "agreement": 0.6,
+      "tp": 7,
+      "fn": 14,
+      "tn": 17,
+      "fp": 2,
+      "n": 40,
+      "verbose_recall": 0.8947,
+      "verbose_recall_interval": [
+        0.6861,
+        0.9706
+      ],
+      "verbose_precision": 0.5484,
+      "verbose_precision_interval": [
+        0.3777,
+        0.7084
+      ]
+    },
+    "Jev any_rule @ 0.4": {
+      "tpr": 0.4762,
+      "tnr": 0.8947,
+      "tpr_interval": [
+        0.2834,
+        0.6763
+      ],
+      "tnr_interval": [
+        0.6861,
+        0.9706
+      ],
+      "balanced_accuracy": 0.6855,
+      "agreement": 0.675,
+      "tp": 10,
+      "fn": 11,
+      "tn": 17,
+      "fp": 2,
+      "n": 40,
+      "verbose_recall": 0.8947,
+      "verbose_recall_interval": [
+        0.6861,
+        0.9706
+      ],
+      "verbose_precision": 0.6071,
+      "verbose_precision_interval": [
+        0.4241,
+        0.7643
+      ]
+    },
+    "Jev any_rule @ 0.5": {
+      "tpr": 0.5714,
+      "tnr": 0.8421,
+      "tpr_interval": [
+        0.3655,
+        0.7553
+      ],
+      "tnr_interval": [
+        0.6243,
+        0.9448
+      ],
+      "balanced_accuracy": 0.7068,
+      "agreement": 0.7,
+      "tp": 12,
+      "fn": 9,
+      "tn": 16,
+      "fp": 3,
+      "n": 40,
+      "verbose_recall": 0.8421,
+      "verbose_recall_interval": [
+        0.6243,
+        0.9448
+      ],
+      "verbose_precision": 0.64,
+      "verbose_precision_interval": [
+        0.4452,
+        0.7975
+      ]
+    },
+    "Jev any_rule @ 0.6": {
+      "tpr": 0.7143,
+      "tnr": 0.8421,
+      "tpr_interval": [
+        0.5004,
+        0.8619
+      ],
+      "tnr_interval": [
+        0.6243,
+        0.9448
+      ],
+      "balanced_accuracy": 0.7782,
+      "agreement": 0.775,
+      "tp": 15,
+      "fn": 6,
+      "tn": 16,
+      "fp": 3,
+      "n": 40,
+      "verbose_recall": 0.8421,
+      "verbose_recall_interval": [
+        0.6243,
+        0.9448
+      ],
+      "verbose_precision": 0.7273,
+      "verbose_precision_interval": [
+        0.5185,
+        0.8685
+      ]
+    },
+    "Jev any_rule @ 0.7": {
+      "tpr": 0.7143,
+      "tnr": 0.6842,
+      "tpr_interval": [
+        0.5004,
+        0.8619
+      ],
+      "tnr_interval": [
+        0.4601,
+        0.8464
+      ],
+      "balanced_accuracy": 0.6992,
+      "agreement": 0.7,
+      "tp": 15,
+      "fn": 6,
+      "tn": 13,
+      "fp": 6,
+      "n": 40,
+      "verbose_recall": 0.6842,
+      "verbose_recall_interval": [
+        0.4601,
+        0.8464
+      ],
+      "verbose_precision": 0.6842,
+      "verbose_precision_interval": [
+        0.4601,
+        0.8464
+      ]
+    },
+    "Jev holistic @ 0.3": {
+      "tpr": 0.1429,
+      "tnr": 0.9474,
+      "tpr_interval": [
+        0.0498,
+        0.3464
+      ],
+      "tnr_interval": [
+        0.7536,
+        0.9906
+      ],
+      "balanced_accuracy": 0.5451,
+      "agreement": 0.525,
+      "tp": 3,
+      "fn": 18,
+      "tn": 18,
+      "fp": 1,
+      "n": 40,
+      "verbose_recall": 0.9474,
+      "verbose_recall_interval": [
+        0.7536,
+        0.9906
+      ],
+      "verbose_precision": 0.5,
+      "verbose_precision_interval": [
+        0.3447,
+        0.6553
+      ]
+    },
+    "Jev holistic @ 0.4": {
+      "tpr": 0.2857,
+      "tnr": 0.9474,
+      "tpr_interval": [
+        0.1381,
+        0.4996
+      ],
+      "tnr_interval": [
+        0.7536,
+        0.9906
+      ],
+      "balanced_accuracy": 0.6165,
+      "agreement": 0.6,
+      "tp": 6,
+      "fn": 15,
+      "tn": 18,
+      "fp": 1,
+      "n": 40,
+      "verbose_recall": 0.9474,
+      "verbose_recall_interval": [
+        0.7536,
+        0.9906
+      ],
+      "verbose_precision": 0.5455,
+      "verbose_precision_interval": [
+        0.3799,
+        0.7016
+      ]
+    },
+    "Jev holistic @ 0.5": {
+      "tpr": 0.381,
+      "tnr": 0.8947,
+      "tpr_interval": [
+        0.2075,
+        0.5912
+      ],
+      "tnr_interval": [
+        0.6861,
+        0.9706
+      ],
+      "balanced_accuracy": 0.6378,
+      "agreement": 0.625,
+      "tp": 8,
+      "fn": 13,
+      "tn": 17,
+      "fp": 2,
+      "n": 40,
+      "verbose_recall": 0.8947,
+      "verbose_recall_interval": [
+        0.6861,
+        0.9706
+      ],
+      "verbose_precision": 0.5667,
+      "verbose_precision_interval": [
+        0.392,
+        0.7262
+      ]
+    },
+    "Jev holistic @ 0.6": {
+      "tpr": 0.5238,
+      "tnr": 0.6316,
+      "tpr_interval": [
+        0.3237,
+        0.7166
+      ],
+      "tnr_interval": [
+        0.4104,
+        0.8085
+      ],
+      "balanced_accuracy": 0.5777,
+      "agreement": 0.575,
+      "tp": 11,
+      "fn": 10,
+      "tn": 12,
+      "fp": 7,
+      "n": 40,
+      "verbose_recall": 0.6316,
+      "verbose_recall_interval": [
+        0.4104,
+        0.8085
+      ],
+      "verbose_precision": 0.5455,
+      "verbose_precision_interval": [
+        0.3466,
+        0.7308
+      ]
+    },
+    "Jev holistic @ 0.7": {
+      "tpr": 0.6667,
+      "tnr": 0.4211,
+      "tpr_interval": [
+        0.4537,
+        0.8281
+      ],
+      "tnr_interval": [
+        0.2314,
+        0.6372
+      ],
+      "balanced_accuracy": 0.5439,
+      "agreement": 0.55,
+      "tp": 14,
+      "fn": 7,
+      "tn": 8,
+      "fp": 11,
+      "n": 40,
+      "verbose_recall": 0.4211,
+      "verbose_recall_interval": [
+        0.2314,
+        0.6372
+      ],
+      "verbose_precision": 0.5333,
+      "verbose_precision_interval": [
+        0.3012,
+        0.7519
+      ]
+    }
+  }
+}

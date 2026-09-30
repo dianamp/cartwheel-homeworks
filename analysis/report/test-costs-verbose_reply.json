@@ -1,0 +1,26 @@
+{
+  "split": "test",
+  "traces": 40,
+  "source": "GPT: DocETL response cache usage priced by LiteLLM; Jev: returned usage at $0.042/MTok input",
+  "judges": {
+    "gpt-4o-mini v0": {
+      "cost_usd": 0.01137,
+      "input_tokens": 84065,
+      "cached_input_tokens": 61568,
+      "output_tokens": 5624,
+      "reasoning_tokens": 0
+    },
+    "gpt-5-mini v0": {
+      "cost_usd": 0.10143,
+      "input_tokens": 87065,
+      "cached_input_tokens": 57472,
+      "output_tokens": 46295,
+      "reasoning_tokens": 40128
+    },
+    "jev-1.13.0 (all rules)": {
+      "cost_usd": 0.00204,
+      "input_tokens": 48582,
+      "output_tokens_billed": 0
+    }
+  }
+}

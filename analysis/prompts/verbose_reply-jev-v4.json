@@ -1,0 +1,49 @@
+{
+  "_about": "Jev (TypeSafe System One) judge for verbose_reply, v4. Minimal wording: one short instruction and one short true/false line per question. Same state fields and decision rules as v0.",
+  "model": "jev-1.13.0",
+  "state_fields": {
+    "earlier_conversation": "Earlier user and assistant messages, oldest first. Context only.",
+    "user_request": "The user's last message, which the final reply answers.",
+    "final_reply": "The assistant reply under evaluation."
+  },
+  "rule_questions": [
+    "repetition",
+    "unneeded_mechanics",
+    "unsolicited_offer"
+  ],
+  "holistic_question": "verbose",
+  "questions": {
+    "repetition": {
+      "type": "noul",
+      "instructions": "Does `final_reply` repeat itself?",
+      "criteria": {
+        "true": "It repeats something.",
+        "false": "It does not."
+      }
+    },
+    "unneeded_mechanics": {
+      "type": "noul",
+      "instructions": "Does `final_reply` explain policy the user did not need?",
+      "criteria": {
+        "true": "It includes unneeded policy detail.",
+        "false": "It does not."
+      }
+    },
+    "unsolicited_offer": {
+      "type": "noul",
+      "instructions": "Does `final_reply` offer something the user did not ask for?",
+      "criteria": {
+        "true": "It makes an unrequested offer.",
+        "false": "It does not."
+      }
+    },
+    "verbose": {
+      "type": "noul",
+      "instructions": "Is `final_reply` verbose?",
+      "criteria": {
+        "true": "It includes unneeded content.",
+        "false": "It does not."
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "_about": "Jev (TypeSafe System One) judge for verbose_reply, v1. Same questions, state fields, and decision rules as v0, with the worked examples and edge-case carve-outs removed from every criterion. Measures how much of v0's behavior came from the edge-case guidance.",
+  "model": "jev-1.13.0",
+  "state_fields": {
+    "earlier_conversation": "Earlier user and assistant messages, oldest first. Context only.",
+    "user_request": "The user's last message, which the final reply answers.",
+    "final_reply": "The assistant reply under evaluation."
+  },
+  "rule_questions": ["repetition", "unneeded_mechanics", "unsolicited_offer"],
+  "holistic_question": "verbose",
+  "questions": {
+    "repetition": {
+      "type": "noul",
+      "instructions": "Does `final_reply` state the same fact or instruction more than once?",
+      "criteria": {
+        "true": "The same fact or instruction appears more than once in `final_reply`.",
+        "false": "Each fact and instruction in `final_reply` appears once."
+      }
+    },
+    "unneeded_mechanics": {
+      "type": "noul",
+      "instructions": "Does `final_reply` include policy mechanics, caveats, exceptions, or background that `user_request` did not ask about and that do not apply to the user's situation?",
+      "criteria": {
+        "true": "`final_reply` includes policy mechanics, caveats, exceptions, or background the user did not need.",
+        "false": "Every detail in `final_reply` bears on the user's request."
+      }
+    },
+    "unsolicited_offer": {
+      "type": "noul",
+      "instructions": "Does `final_reply` offer to do a different or additional action that `user_request` did not ask for?",
+      "criteria": {
+        "true": "`final_reply` offers an action the user did not ask for.",
+        "false": "`final_reply` makes no such offer."
+      }
+    },
+    "verbose": {
+      "type": "noul",
+      "instructions": "Does `final_reply` contain content the user did not need to answer `user_request`?",
+      "criteria": {
+        "true": "`final_reply` contains content the user did not need.",
+        "false": "Every part of `final_reply` serves the user's request."
+      }
+    }
+  }
+}
